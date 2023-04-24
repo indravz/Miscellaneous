@@ -117,3 +117,5 @@ python3 -c "from flask import Flask; app = Flask(__name__); @app.route('/'); def
                 end
 
 export KONG_UNTRUSTED_LUA_SANDBOX_REQUIRES=resty.http
+
+untrusted_lua_sandbox_requires = resty.template
