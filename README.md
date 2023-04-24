@@ -78,3 +78,5 @@ def index():
 
 if __name__ == '__main__':
     app.run()
+
+python3 -m http.server 8000 --cgi
