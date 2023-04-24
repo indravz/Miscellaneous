@@ -80,3 +80,5 @@ if __name__ == '__main__':
     app.run()
 
 python3 -m http.server 8000 --cgi
+
+python3 -c "from flask import Flask; app = Flask(__name__); @app.route('/'); def hello(): return 'Hello, World!', 200; app.run()"
