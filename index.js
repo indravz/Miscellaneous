@@ -1,10 +1,9 @@
 import { OpenApiValidator } from 'openapi-validator';
-import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-const apiSpec = path.join(__dirname, 'path/to/your/oas3/spec.yaml');
-const validator = new OpenApiValidator({ apiSpec });
+const apiSpecUrl = 'https://example.com/path/to/your/oas3/spec.yaml';
+const validator = new OpenApiValidator({ url: apiSpecUrl });
 
 const app = express();
 
