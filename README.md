@@ -115,3 +115,5 @@ python3 -c "from flask import Flask; app = Flask(__name__); @app.route('/'); def
                   ngx.say(res.body)
                   ngx.exit(ngx.status)
                 end
+
+export KONG_UNTRUSTED_LUA_SANDBOX_REQUIRES=resty.http
