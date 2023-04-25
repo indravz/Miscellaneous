@@ -43,3 +43,41 @@ export const validateInputs = OpenApiValidator.middleware({
   validateRequests: true,
   validateResponses: true,
 });
+
+
+///////////////////////
+
+import express from "express";
+import * as OpenApiValidator from "express-openapi-validator";
+
+const app = express();
+
+const specUrl = "https://petstore.swagger.io/v2/swagger.json";
+
+app.use(
+  OpenApiValidator.middleware({
+    apiSpec: specUrl,
+    validateRequests: true,
+    validateResponses: true,
+  })
+);
+
+app.get("/pets/:petId", (req, res, next) => {
+  const petId = req.params.petId;
+  // do something with the petId
+  res.send(`You requested pet with ID ${petId}`);
+});
+
+// Add error handling middleware to the application
+app.use((err, req, res, next) => {
+  // format error
+  res.status(err.status || 500).json({
+    message: err.message,
+    errors: err.errors,
+  });
+});
+
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});
+
