@@ -29,3 +29,17 @@ app.post('/example', (req, res) => {
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
+
+
+////////////////////
+
+import path from "path";
+import * as OpenApiValidator from "express-openapi-validator";
+
+const spec = path.join("assets", "openapi.json");
+
+export const validateInputs = OpenApiValidator.middleware({
+  apiSpec: spec,
+  validateRequests: true,
+  validateResponses: true,
+});
