@@ -305,4 +305,50 @@ app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
 
+////////////////////////////////////////working //////////////////////////////////
+
+const express = require('express');
+const { validate } = require('openapi-schema-validator');
+const fs = require('fs');
+
+const app = express();
+
+// Define the path to your OpenAPI spec file
+const openapiSpecFile = 'openapi.json';
+const openapiSpec = JSON.parse(fs.readFileSync(openapiSpecFile, 'utf8'));
+
+// Middleware function to modify the request path
+function modifyRequestPath(req, res, next) {
+  req.url = req.url.replace(/^\/validate\//, '/');
+  next();
+}
+
+// Middleware function to validate the request body against the OpenAPI spec
+function validateRequestBody(req, res, next) {
+  const validationErrors = validate(openapiSpec, req.body);
+  if (validationErrors.length > 0) {
+    res.status(400).json({
+      status: 'error',
+      message: 'Request body validation failed',
+      errors: validationErrors,
+    });
+  } else {
+    next();
+  }
+}
+
+// Route to handle POST requests to /validate/:path
+app.post('/validate/:path', modifyRequestPath, express.json(), validateRequestBody, (req, res) => {
+  // Process the request as needed
+  res.status(200).json({
+    status: 'success',
+    message: 'Request body is valid',
+  });
+});
+
+// Start the server
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
+});
 
