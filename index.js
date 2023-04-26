@@ -81,3 +81,40 @@ app.listen(3000, () => {
   console.log("Server listening on port 3000");
 });
 
+/////////////////////////////////request builder////////////////////////////////////////////
+
+const express = require('express');
+const app = express();
+
+// Middleware to save the headers and incoming body to req.savedData
+app.use('/validate/:path(*)', (req, res, next) => {
+  // Save the headers and incoming body to req.savedData
+  req.savedData = {
+    headers: req.headers,
+    body: req.body
+  };
+  next();
+});
+
+// POST route to build a new request body with /path and saved headers and incoming body
+app.post('/validate/:path(*)', (req, res) => {
+  const endpointPath = req.params.path;
+  const savedHeaders = req.savedData.headers;
+  const savedBody = req.savedData.body;
+
+  // Build the new request body with /path and saved headers and incoming body
+  const newRequestBody = {
+    path: endpointPath,
+    headers: savedHeaders,
+    body: savedBody
+  };
+
+  // Send the new request body as the response to the client
+  res.json(newRequestBody);
+});
+
+// Start the server on port 3000
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
