@@ -272,3 +272,37 @@ if (validationErrors.length > 0) {
   console.log('Request body is valid!');
 }
 
+////////////////////////////openapi validator
+
+const express = require('express');
+const { validate } = require('openapi-schema-validator');
+const app = express();
+
+// Middleware function to modify the request path
+const modifyRequestPath = (req, res, next) => {
+  req.url = `/${req.params.path}`;
+  next();
+};
+
+// Middleware function to validate request body against OpenAPI spec
+const validateRequestBody = (req, res, next) => {
+  const openApiSpec = require('./openapi.json');
+  const validationResult = validate(openApiSpec, req.body, { throwError: false });
+  if (validationResult.errors.length > 0) {
+    return res.status(400).json({ errors: validationResult.errors });
+  }
+  next();
+};
+
+// Route to handle POST /validate/:path
+app.post('/validate/:path', modifyRequestPath, express.json(), validateRequestBody, (req, res) => {
+  // Respond with 200 OK if request body is valid against OpenAPI spec
+  res.sendStatus(200);
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+
