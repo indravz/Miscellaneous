@@ -118,3 +118,17 @@ app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
 
+////////////////////////validate path/////////////////////////
+
+const apiSpec = './path/to/openapi-spec.yaml'; // Replace with your OpenAPI spec file
+const validator = new OpenApiValidator({ apiSpec });
+
+validator.validateRequest(newRequestBody, { validateRequest: true, validateResponse: false })
+  .then((result) => {
+    // If the request is valid, send a success response
+    console.log('Request is valid:', result);
+  })
+  .catch((error) => {
+    // If the request is invalid, log the validation error to the console
+    console.error('Error:', error);
+  });
