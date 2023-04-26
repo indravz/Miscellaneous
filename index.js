@@ -249,4 +249,26 @@ app.post('/validate/:path', (req, res) => {
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
+////////////////////////////schema validator ///////////////////////////
+const { validate } = require('openapi-schema-validator');
+const fs = require('fs');
+
+// Define the path to your OpenAPI spec file and request body
+const openapiSpecFile = 'openapi.json';
+const requestBodyFile = 'request.json';
+
+// Load the OpenAPI spec file and request body into memory
+const openapiSpec = JSON.parse(fs.readFileSync(openapiSpecFile, 'utf8'));
+const requestBody = JSON.parse(fs.readFileSync(requestBodyFile, 'utf8'));
+
+// Validate the request body against the OpenAPI spec
+const validationErrors = validate(openapiSpec, requestBody);
+
+// If there are any validation errors, log them to the console
+if (validationErrors.length > 0) {
+  console.error('Request body validation failed:');
+  console.error(validationErrors);
+} else {
+  console.log('Request body is valid!');
+}
 
