@@ -202,3 +202,51 @@ app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
 
+./////////////////////////////////////////////////////////////////////////////
+
+const express = require('express');
+const OpenApiValidator = require('express-openapi-validator');
+const app = express();
+
+// Middleware function to modify request body
+const modifyRequestBody = (req, res, next) => {
+  const path = req.params.path;
+  req.url = `/${path}`;
+  req.path = `/${path}`;
+  next();
+};
+
+// Custom logger function
+const logger = (errors, req, res, next) => {
+  if (!errors || errors.length === 0) {
+    console.log('Request validated successfully');
+  } else {
+    console.log('Request validation failed');
+  }
+  next(errors);
+};
+
+// Middleware function to validate request against OpenAPI spec
+app.use('/validate/:path', modifyRequestBody);
+
+app.use(
+  '/validate/:path',
+  OpenApiValidator.middleware({
+    apiSpec: './openapi.yaml',
+    validateRequests: true,
+    validateResponses: true,
+    errorTransformer: logger,
+  })
+);
+
+// POST route to handle validated requests
+app.post('/validate/:path', (req, res) => {
+  // Add your business logic here to process the modified request body
+  res.status(200).json({ message: 'Success' });
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
+
