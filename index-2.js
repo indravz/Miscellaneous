@@ -54,3 +54,16 @@ app.use((err, req, res, next) => {
 const server = app.listen(3000, () => {
   console.log(`Server listening on port ${server.address().port}`);
 });
+/////////////////////////////////////////
+
+import SwaggerParser from 'swagger-parser';
+
+const openapiFile = 'path/to/openapi/spec.json';
+
+SwaggerParser.validate(openapiFile, (err, api) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log('OpenAPI specification is valid');
+  }
+});
