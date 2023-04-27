@@ -352,3 +352,47 @@ app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
 
+/////////////////////
+
+const OpenAPISchemaValidator = require("openapi-schema-validator").default;
+const openAPIValidator = new OpenAPISchemaValidator({ version: 3 });
+const fs = require("fs");
+const path = require("path");
+
+const main = async () => {
+  // Read the OpenAPI schema
+  const openApiJsonFilepath = path.join(__dirname, "openapi.json");
+  const openApiSchema = JSON.parse(
+    fs.readFileSync(openApiJsonFilepath, "utf-8")
+  );
+
+  // Define the request body
+  const requestBody = {
+    name: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    year: 1925,
+  };
+
+  // Define the path and HTTP method for the request
+  const path = "/books";
+  const method = "post";
+
+  // Validate the request body against the OpenAPI schema
+  const res = openAPIValidator.validate(
+    {
+      requestBody,
+      path,
+      method,
+    },
+    openApiSchema
+  );
+
+  if (res.errors.length) {
+    console.error(res.errors);
+    process.exit(1);
+  } else {
+    console.log("Request body is valid according to the OpenAPI schema!");
+  }
+};
+
+main();
