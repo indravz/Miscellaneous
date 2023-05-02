@@ -1,3 +1,12 @@
+const validateNewRequestBody = (req, res, next) => {
+  OpenApiValidator({
+    validateRequests: true,
+    apiSpec: spec,
+    validateResponses: false,
+  })(req.newRequest, res, next);
+};
+
+
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
