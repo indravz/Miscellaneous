@@ -1,3 +1,5 @@
+https://goldmansachs.zoom.us/j/*******524?pwd=Zkt3WUFGcmhEbFhxUmYxTmtWckl0Zz09
+
 fields @timestamp, @message
 | filter message like "StoppedTask: Task failed to start" or message like "Essential container in task exited"
 | sort @timestamp desc
