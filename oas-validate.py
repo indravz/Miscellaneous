@@ -1,3 +1,40 @@
+from flask import Flask, request
+from swagger_spec_validator import validate_request
+
+app = Flask(__name__)
+
+# Load the OpenAPI spec file
+with open('openapi.yaml', 'r') as file:
+    openapi_spec = file.read()
+
+@app.route('/api/v1/user', methods=['POST'])
+def create_user():
+    # Validate the incoming request against the OpenAPI spec
+    try:
+        validate_request(openapi_spec, request=request, spec_kwargs={'version': '3.0.2'})
+    except Exception as e:
+        return str(e), 400
+
+    # Handle the request and return a response
+    # ...
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from flask import Flask, request, jsonify
 from openapi_schema_validator import validate
 import json
