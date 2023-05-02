@@ -1,3 +1,13 @@
+import yaml
+import json
+
+with open("input.yaml", "r") as yamlfile:
+    data = yaml.safe_load(yamlfile)
+
+with open("output.json", "w") as jsonfile:
+    json.dump(data, jsonfile)
+
+
 test# Miscellaneous
 
 #!/bin/bash
