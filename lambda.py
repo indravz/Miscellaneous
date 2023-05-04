@@ -1,20 +1,38 @@
 import boto3
 
-sqs = boto3.resource('sqs')
-queue_url = 'https://sqs.us-east-1.amazonaws.com/123456789012/my-queue-name'
+# Define the AWS clients for SQS and DynamoDB
+sqs = boto3.client('sqs')
+dynamodb = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
-    messages = []
+    # Get the SQS queue ARN from the input event
+    queue_arn = event['queue_arn']
 
-    # Retrieve up to 10 messages from the SQS queue
-    for message in sqs.Queue(queue_url).receive_messages(MaxNumberOfMessages=10):
-        messages.append(message.body)
+    # Extract the queue name from the queue ARN
+    queue_name = queue_arn.split(':')[-1]
 
-    # Process the messages here
-    for message in messages:
-        print(message)
+    # Get the queue URL from the queue name
+    queue_url = sqs.get_queue_url(QueueName=queue_name)['QueueUrl']
 
-    return {
-        'statusCode': 200,
-        'body': 'Successfully processed {} messages.'.format(len(messages))
-    }
+    # Retrieve messages from the queue
+    response = sqs.receive_message(QueueUrl=queue_url, MaxNumberOfMessages=10)
+
+    # Process the messages and write them to the DynamoDB table
+    for message in response['Messages']:
+        # Extract the message details
+        message_id = message['MessageId']
+        message_body = message['Body']
+        message_attributes = message['Attributes']
+
+        # Write the message to the DynamoDB table
+        dynamodb.put_item(
+            TableName='my-dynamodb-table',
+            Item={
+                'message_id': {'S': message_id},
+                'message_body': {'S': message_body},
+                'message_attributes': {'M': message_attributes}
+            }
+        )
+
+        # Delete the message from the SQS queue
+        sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=message['ReceiptHandle'])
