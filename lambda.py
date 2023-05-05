@@ -66,3 +66,17 @@ string_without_regex = re.sub(regex_pattern, '', string_with_regex)
 print(new_text)
 print(string_without_regex)
 
+
+
+import json
+
+# Define a sample dictionary
+my_dict = {"name": "John", "age": 30, "city": "New York"}
+
+# Convert the dictionary to a JSON string
+json_string = json.dumps(my_dict)
+
+# Print the JSON string
+print(json_string)
+
+
