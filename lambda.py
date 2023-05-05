@@ -1,3 +1,4 @@
+# -*- coding: iso-8859-1 -*-
 import boto3
 
 # Define the AWS clients for SQS and DynamoDB
