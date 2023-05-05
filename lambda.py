@@ -36,3 +36,33 @@ def lambda_handler(event, context):
 
         # Delete the message from the SQS queue
         sqs.delete_message(QueueUrl=queue_url, ReceiptHandle=message['ReceiptHandle'])
+        
+        
+        
+        
+        
+        
+import re
+
+# Define a string that contains the plus-minus sign, left-pointing double angle quotation mark, and right-pointing double angle quotation mark
+text = "This is a ± sample «quoted» text.»"
+
+# Define a regular expression pattern that matches any of the three Unicode characters
+pattern = "[\u00B1\u00AB\u00BB]"
+
+# Replace any matches of the regular expression pattern with a comma
+new_text = re.sub(pattern, ",", text)
+
+# Define the string with regular expressions
+string_with_regex = "This is a string with \n, \\, and <EOR> characters \\EOR\\."
+
+# Define a regular expression pattern to match the characters to be removed
+regex_pattern = r'[\n\\]|<EOR>'
+
+# Replace the matched characters with an empty string
+string_without_regex = re.sub(regex_pattern, '', string_with_regex)
+
+# Print the results
+print(new_text)
+print(string_without_regex)
+
