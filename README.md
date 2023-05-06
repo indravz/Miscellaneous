@@ -1,3 +1,8 @@
+apiHostName	apigw.dap.foliofn.com
+apiHostNameInternal	apigw-int.dap.foliofn.com
+pathPrefix	/foliofn
+
+
 =================================XXXXXXXXXXXXXX==============================================
 local http = require "resty.http"
 
