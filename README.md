@@ -1,3 +1,7 @@
+If you are working on OPT, you must transfer before the semester begins. You cannot
+legally work on OPT with one university and start a new program with another. To minimize the gap in your ability to work, it is
+best to transfer your SEVIS by your orientation date.
+
 apiHostName	apigw.dap.foliofn.com
 apiHostNameInternal	apigw-int.dap.foliofn.com
 pathPrefix	/foliofn
