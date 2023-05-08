@@ -1,3 +1,42 @@
+Subject: Request for Assistance with Collaborative Practical Training Agreement
+
+Hello HR Team,
+
+I have obtained the required forms from my school advisor regarding the CPT agreement for my employment with GS. , and I have attached them to this email for your reference.
+
+I have been in communication with our school's DSO regarding this statement in the agreement - "the position must be an integral part of the student's course study." I have inquired whether it would be possible to modify the flagged wording. However, the school's DSO has expressed reluctance to make any modifications to this requirement.
+
+Given this situation, I request your guidance on how to proceed forward in order to continue my employment with GS. It would be greatly appreciated if you could provide me with information or any alternative solutions that may be available to address this issue. 
+
+Looking forward to your suggestions
+
+Best regards,
+[Your Name]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 If you are working on OPT, you must transfer before the semester begins. You cannot
 legally work on OPT with one university and start a new program with another. To minimize the gap in your ability to work, it is
 best to transfer your SEVIS by your orientation date.
