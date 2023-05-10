@@ -1,3 +1,24 @@
+# -*- coding: cp1252 -*-
+import chardet
+
+# Read the file in binary mode
+with open('myfile.txt', 'rb') as f:
+    data = f.read()
+
+    # Detect the encoding
+    result = chardet.detect(data)
+    encoding = result['encoding']
+
+# Use the detected encoding
+with open('myfile.txt', encoding=encoding) as f:
+    content = f.read()
+
+print(content)
+
+
+
+
+
 # -*- coding: iso-8859-1 -*-
 import boto3
 
