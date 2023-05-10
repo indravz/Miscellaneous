@@ -1,3 +1,13 @@
+Ottawa University - MBA
+Monroe College
+
+Humphreys University
+
+Saint Peter's University - Data science
+McDaniel College - Data Analytics
+National Louis University
+
+
 
 Program: Master of science in information studies,
 
