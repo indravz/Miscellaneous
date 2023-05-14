@@ -1,3 +1,52 @@
+********************kong - prefunction plugin *************************
+_plugins:
+  - name: my-plugin
+    config:
+      # configuration options for your plugin, if any
+      # ...
+      script: |
+        -- set the request headers
+        kong.log.info("Setting X-Forwarded-URL and X-Forwarded-Method headers")
+        kong.service.request.set_header("X-Forwarded-URL", kong.request.get_path_with_query())
+        kong.service.request.set_header("X-Forwarded-Method", kong.request.get_method())
+        
+        -- make a copy of the original headers
+        kong.log.debug("Making a copy of the original headers")
+        local headers = kong.request.get_headers()
+        local original_headers = {}
+        for k, v in pairs(headers) do
+          original_headers[k] = v
+        end
+        
+        -- read the body data
+        kong.log.debug("Reading the request body")
+        kong.service.request.enable_buffering()
+        local body_data = kong.service.request.get_body()
+        
+        -- make a request to the validation server
+        kong.log.info("Making a request to the validation server")
+        local httpc = kong.service.request.new()
+        local upstream_uri = kong.var.upstream_uri
+        local res, err = httpc:request_uri(upstream_uri, {
+          method = "POST",
+          headers = original_headers,
+          body = body_data
+        })
+        
+        -- if the response is not 200, return the full response to the caller
+        if res.status ~= 200 then
+          kong.log.err("Validation failed: status=" .. tostring(res.status) .. ", body=" .. tostring(res.body))
+          kong.response.exit(res.status, res.body)
+        end
+        
+        -- set the validated headers and body
+        kong.log.debug("Setting validated headers and body")
+        kong.service.request.set_headers(original_headers)
+        kong.service.request.set_raw_body(body_data)
+***********************************************************************************************************************************************************
+
+
+
 Ottawa University - MBA
 Monroe College
 
