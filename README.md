@@ -1,4 +1,6 @@
 ********************kong - prefunction plugin *************************
+
+
 _plugins:
   - name: my-plugin
     config:
@@ -43,6 +45,7 @@ _plugins:
         kong.log.debug("Setting validated headers and body")
         kong.service.request.set_headers(original_headers)
         kong.service.request.set_raw_body(body_data)
+
 ***********************************************************************************************************************************************************
 
 
