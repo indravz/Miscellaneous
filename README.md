@@ -1,3 +1,66 @@
+*****************kong-plugin with err handling*******************************
+_plugins:
+  - name: my-plugin
+    config:
+      # configuration options for your plugin, if any
+      # ...
+      script: |
+        -- set the request headers
+        kong.log.info("Setting X-Forwarded-URL and X-Forwarded-Method headers")
+        local set_header_success, set_header_err = pcall(kong.service.request.set_header, "X-Forwarded-URL", kong.request.get_path_with_query())
+        if not set_header_success then
+          kong.log.err("Failed to set X-Forwarded-URL header: " .. tostring(set_header_err))
+        end
+
+        local set_method_success, set_method_err = pcall(kong.service.request.set_header, "X-Forwarded-Method", kong.request.get_method())
+        if not set_method_success then
+          kong.log.err("Failed to set X-Forwarded-Method header: " .. tostring(set_method_err))
+        end
+        
+        -- make a copy of the original headers
+        kong.log.debug("Making a copy of the original headers")
+        local headers = kong.request.get_headers()
+        local original_headers = {}
+        for k, v in pairs(headers) do
+          original_headers[k] = v
+        end
+        
+        -- read the body data
+        kong.log.debug("Reading the request body")
+        kong.service.request.enable_buffering()
+        local body_data = kong.service.request.get_body()
+        
+        -- make a request to the validation server
+        kong.log.info("Making a request to the validation server")
+        local httpc = kong.service.request.new()
+        local res, err = httpc:request_uri("http://localhost:8080/request-validations", {
+          method = "POST",
+          headers = original_headers,
+          body = body_data
+        })
+        if err then
+          kong.log.err("Failed to make a request to the validation server: " .. tostring(err))
+          kong.response.exit(500, {message = "Internal Server Error"})
+        end
+        
+        -- if the response is not 200, return the full response to the caller
+        if res.status ~= 200 then
+          kong.log.err("Validation failed: status=" .. tostring(res.status) .. ", body=" .. tostring(res.body))
+          kong.response.exit(res.status, res.body)
+        end
+        
+        -- set the validated headers and body
+        kong.log.debug("Setting validated headers and body")
+        local set_headers_success, set_headers_err = pcall(kong.service.request.set_headers, original_headers)
+        if not set_headers_success then
+          kong.log.err("Failed to set validated headers: " .. tostring(set_headers_err))
+        end
+
+        local set_body_success, set_body_err = pcall(kong.service.request.set_raw_body, body_data)
+        if not set_body_success then
+          kong.log.err("Failed to set validated body: " .. tostring(set_body_err))
+        end
+***************************************************************************************************************************
 ********************kong - prefunction plugin *************************
 
 
