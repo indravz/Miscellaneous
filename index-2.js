@@ -1,4 +1,18 @@
 
+
+const https = require('https');
+const fs = require('fs');
+
+const caCert = fs.readFileSync('./certs/root.crt');
+
+const agent = new https.Agent({
+  ca: caCert
+});
+
+// Use the 'agent' when making requests with Axios or the 'https' module
+
+
+
 const agent = new https.Agent({
   rejectUnauthorized: false,
   secureOptions: constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
