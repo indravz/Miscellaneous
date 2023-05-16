@@ -1,3 +1,30 @@
+
+API Gateway: integration-priv-ext
+arn:aws:execute-api:us-east-1:127823895237:zxwiufz8h6/*/*/*
+API endpoint: https://zxwiufz8h6.execute-api.us-east-1.amazonaws.com/dap/{proxy+}
+
+Details
+
+API Gateway: integration-priv-int
+arn:aws:execute-api:us-east-1:127823895237:vbmo1hnkxi/*/*/*
+API endpoint: https://vbmo1hnkxi.execute-api.us-east-1.amazonaws.com/dap/{proxy+}
+Details
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 *****************kong-plugin with err handling*******************************
 _plugins:
   - name: my-plugin
