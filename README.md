@@ -1,3 +1,11 @@
+app.use(
+  OpenApiValidator.middleware({
+    apiSpec: './openapi.yaml',
+    validateRequests: true, // (default)
+    validateResponses: true, // false by default
+    ignorePaths: /healthcheck
+  }),
+);
 
 API Gateway: integration-priv-ext
 arn:aws:execute-api:us-east-1:127823895237:zxwiufz8h6/*/*/*
