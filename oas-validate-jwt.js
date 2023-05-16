@@ -1,3 +1,28 @@
+const fs = require('fs');
+
+// Specify the file path
+const filePath = 'path/to/file.txt';
+
+// Read the file contents
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error reading file:', err);
+  } else {
+    // Print the file contents
+    console.log(data);
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
 const express = require('express');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
