@@ -1,3 +1,7 @@
+const agent = new https.Agent({
+  rejectUnauthorized: false // Ignore SSL verification (not recommended in production)
+});
+
 ////////////////////////////////with spec endpoint////////////////////
 
 const express = require('express');
