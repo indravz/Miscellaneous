@@ -1,3 +1,9 @@
+const stream = {
+  write: (message) => {
+    logger.info(message.trim());
+  }
+};
+
 //////////////logger///////////////////////////////
 const express = require('express');
 const axios = require('axios');
