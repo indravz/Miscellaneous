@@ -1,3 +1,92 @@
+//////////////logger///////////////////////////////
+const express = require('express');
+const axios = require('axios');
+const jwt = require('jsonwebtoken');
+const winston = require('winston');
+
+const app = express();
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.simple(),
+  transports: [
+    new winston.transports.Console()
+  ]
+});
+
+const pingFederateUrl = 'https://your-ping-federate-url.com/authenticate'; // Replace with your Ping Federate URL
+const specEndpointUrl = 'https://your-spec-endpoint-url.com/spec'; // Replace with your spec endpoint URL
+const clientId = 'your-client-id'; // Replace with your client ID
+const clientSecret = 'your-client-secret'; // Replace with your client secret
+const username = 'your-username'; // Replace with your username
+const password = 'your-password'; // Replace with your password
+
+app.get('/spec', async (req, res) => {
+  try {
+    const jwtPayload = await getJwt();
+    logger.info('JWT retrieved:', jwtPayload);
+    const responseData = await callSpecEndpoint(jwtPayload);
+    logger.info('Response from spec endpoint:', responseData);
+    res.send(responseData);
+  } catch (err) {
+    logger.error('Error:', err);
+    res.status(500).send('Internal server error');
+  }
+});
+
+// Function to authenticate and get JWT from Ping Federate
+async function getJwt() {
+  const postData = {
+    grant_type: 'password',
+    scope: 'openid',
+    client_id: clientId,
+    client_secret: clientSecret,
+    username: username,
+    password: password
+  };
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  };
+
+  const response = await axios.post(pingFederateUrl, postData, config);
+
+  if (response.status === 200) {
+    const accessToken = response.data.access_token;
+    const decodedJwt = jwt.decode(accessToken, { complete: true });
+    const jwtPayload = decodedJwt.payload;
+    return jwtPayload;
+  } else {
+    throw new Error(`Failed to authenticate with Ping Federate. Status code: ${response.status}`);
+  }
+}
+
+// Function to make calls to spec endpoint with JWT
+async function callSpecEndpoint(jwtPayload) {
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${jwtPayload}`,
+    }
+  };
+
+  const response = await axios.get(specEndpointUrl, config);
+
+  if (response.status === 200) {
+    return response.data;
+  } else {
+    throw new Error(`Failed to get data from spec endpoint. Status code: ${response.status}`);
+  }
+}
+
+const port = 3000;
+app.listen(port, () => {
+  logger.info(`Server listening on port ${port}`);
+});
+
+///////////////////////////logger//////////////////////////////////
+
 /////////////////cache-2/////////////////////////////////////
 const express = require('express');
 const axios = require('axios');
