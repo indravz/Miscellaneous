@@ -1,3 +1,7 @@
+// Setup request logging with morgan
+app.use(morgan('combined', { stream: logger.stream }));
+
+
 app.use(
   OpenApiValidator.middleware({
     apiSpec: './openapi.yaml',
