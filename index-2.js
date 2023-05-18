@@ -1,4 +1,50 @@
+/////////////////////////////////////////////////////////////////////cache////////////////////////////////
 
+const express = require('express');
+const axios = require('axios');
+const cache = require('memory-cache');
+const app = express();
+const port = 3000;
+
+const cacheDuration = 60 * 60 * 1000; // Cache duration: 1 hour
+
+// Function to fetch the spec file data from example.api
+function fetchSpecFileData() {
+  return axios.get('https://example.api/getspecfile')
+    .then(response => response.data)
+    .catch(error => {
+      console.error('Error retrieving spec file:', error);
+      return null;
+    });
+}
+
+// GET endpoint
+app.get('/', (req, res) => {
+  let specFileData = cache.get('specFileData'); // Attempt to retrieve the data from cache
+
+  if (!specFileData) {
+    fetchSpecFileData() // Make the API call to fetch the data
+      .then(data => {
+        specFileData = data;
+        if (specFileData) {
+          cache.put('specFileData', specFileData, cacheDuration); // Store the data in cache
+        }
+        res.send(specFileData); // Send the data as the response
+      })
+      .catch(() => {
+        res.status(500).send('Error retrieving spec file');
+      });
+  } else {
+    res.send(specFileData); // Serve the cached data
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const https = require('https');
 const fs = require('fs');
