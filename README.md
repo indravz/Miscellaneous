@@ -1,3 +1,8 @@
+local cookies = kong.request.get_header("cookie")
+if cookies then
+  original_headers["cookie"] = cookies
+end
+
 filter @message like /your_string/
 | fields @timestamp, @message
 
