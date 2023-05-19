@@ -1,3 +1,7 @@
+filter @message like /your_string/
+| fields @timestamp, @message
+
+
 // Setup request logging with morgan
 app.use(morgan('combined', { stream: logger.stream }));
 
