@@ -1,3 +1,6 @@
+validateApiSpec (optional)
+
+
 local cookies = kong.request.get_header("cookie")
 if cookies then
   original_headers["cookie"] = cookies
