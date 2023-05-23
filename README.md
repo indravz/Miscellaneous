@@ -1,3 +1,13 @@
+As part of my role, I actively utilize data analytics techniques to analyze customer metrics and derive actionable insights using Python. These insights are instrumental in driving data-driven decision-making processes and optimizing strategies for customer engagement and retention
+
+responsible for managing the organization's cloud infrastructure, ensuring its design, security, scalability, and performance optimization.
+
+Actively contribute to the development of microservices, utilizing best practices and implementing efficient and reliable solutions to enhance system functionality.
+
+dedicated to maintaining data integrity and implementing robust security measures to protect sensitive information within the cloud infrastructure.
+
+
+
 validateApiSpec (optional)
 
 
