@@ -1,3 +1,16 @@
+In my current role as Vice President at BOFA, I am responsible for managing the team's cloud infrastructure. This includes ensuring its design, security, scalability, and performance optimization for diverse applications.
+
+I actively contribute to the development of microservices, employing best practices and implementing efficient and reliable solutions to enhance system functionality.
+
+Furthermore, I utilize data analytics techniques to analyze customer metrics and derive actionable insights using Python. These insights play a crucial role in driving data-driven decision-making processes.
+
+Additionally, I am dedicated to maintaining data integrity and implementing robust security measures to protect sensitive information within the cloud infrastructure.
+
+
+
+
+
+
 As part of my role, I actively utilize data analytics techniques to analyze customer metrics and derive actionable insights using Python. These insights are instrumental in driving data-driven decision-making processes and optimizing strategies for customer engagement and retention
 
 responsible for managing the organization's cloud infrastructure, ensuring its design, security, scalability, and performance optimization.
