@@ -1,3 +1,77 @@
+User
+In he following code - can i use var.args instead of ngx.get_uri_args - what is the difference              
+                      local http = require "resty.http"
+
+-- Define the function to be executed in the pre-function phase
+local function callExampleAPIHandler(conf)
+  -- Get the upstream URI from the request
+  local upstream_uri = ngx.var.upstream_uri
+
+  -- Get the query parameters from the request
+  local query_parameters = ngx.req.get_uri_args()
+
+  -- Build the request URL
+  local request_url = conf.example_api_url .. upstream_uri
+
+  -- Append query parameters to the request URL if present
+  if next(query_parameters) ~= nil then
+    request_url = request_url .. "?" .. ngx.encode_args(query_parameters)
+  end
+
+  -- Create an HTTP client
+  local httpc = http.new()
+
+  -- Make the request to the example API
+  local res, err = httpc:request_uri(request_url, {
+    method = ngx.HTTP_GET,
+    headers = {
+      ["Content-Type"] = "application/json",
+    },
+  })
+
+  -- Check for any errors
+  if not res then
+    ngx.log(ngx.ERR, "Failed to make a request to the example API: ", err)
+    return ngx.exit(500)
+  end
+
+  -- Set the response status, headers, and body
+  ngx.status = res.status
+  ngx.header["Content-Type"] = res.headers["Content-Type"]
+  ngx.say(res.body)
+
+  -- Close the HTTP client connection
+  httpc:close()
+end
+
+-- Instantiate the plugin
+local ExampleAPICallHandler = {
+  PRIORITY = 1000, -- Set the priority of the plugin
+  VERSION = "1.0",
+}
+
+-- Execute the function in the pre-function phase
+function ExampleAPICallHandler:access(conf)
+  callExampleAPIHandler(conf)
+end
+
+-- Return the plugin object
+return ExampleAPICallHandler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ######################kong-plugin-config################
 -- Set the request headers
 ngx.req.set_header("X-Forwarded-URL", ngx.var.request_uri)
