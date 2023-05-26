@@ -1,3 +1,5 @@
+find /path/to/folders -type f -name "*.txt" -exec cat {} + > consolidated.txt
+
 aws s3 cp s3://your-bucket-name/ local-path/ --recursive --exclude "*" --include "abc.2023-05-26*"
 
 
