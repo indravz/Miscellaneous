@@ -1,3 +1,6 @@
+aws s3 cp s3://your-bucket-name/ local-path/ --recursive --exclude "*" --include "abc.2023-05-26*"
+
+
 In my current role as Vice President at BOFA, I am responsible for managing the team's cloud infrastructure. This includes ensuring its design, security, scalability, and performance optimization for diverse applications.
 
 I actively contribute to the development of microservices, employing best practices and implementing efficient and reliable solutions to enhance system functionality.
