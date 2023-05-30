@@ -1,3 +1,14 @@
+path) => {
+  const validPaths = [
+    '/api/v1/users',
+    '/api/v1/accounts/test',
+    '/api/v1/v2/groups/create'
+  ];
+
+  return validPaths.some(validPath => path === validPath);
+};
+
+
 find /path/to/folders -type f -name "*.txt" -exec cat {} + > consolidated.txt
 
 aws s3 cp s3://your-bucket-name/ local-path/ --recursive --exclude "*" --include "abc.2023-05-26*"
