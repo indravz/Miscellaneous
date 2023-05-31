@@ -3,7 +3,8 @@
   const validPaths = [
     /^\/api\/v1\/$/,
     /^\/api\/v2\/$/,
-    /^\/api\/test\/functiom\/$/
+    /^\/api\/test\/functiom\/$/,
+     /^\/api\/v1\/test1\/test2\/$/,
   ];
 
   return validPaths.some(validPath => validPath.test(path));
