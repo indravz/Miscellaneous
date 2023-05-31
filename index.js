@@ -1,3 +1,17 @@
+//////////////
+(path) => {
+  const validPaths = [
+    /^\/api\/v1\/$/,
+    /^\/api\/v2\/$/,
+    /^\/api\/test\/functiom\/$/
+  ];
+
+  return validPaths.some(validPath => validPath.test(path));
+};
+///////////////////
+
+
+
 import { OpenApiValidator } from 'openapi-validator';
 import express from 'express';
 import bodyParser from 'body-parser';
