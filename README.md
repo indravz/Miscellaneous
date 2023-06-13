@@ -1,3 +1,6 @@
+AWS Batch, AWS CloudFormation, AWS DataSync, AWS Lambda, AWS Management Console, AWS Support Center, Amazon API Gateway, Amazon CloudWatch, Amazon Cognito, Amazon Connect, Amazon Inspector, Amazon Location Service, Amazon Redshift, EC2 Image Builder
+
+
 path) => {
   const validPaths = [
     '/api/v1/users',
