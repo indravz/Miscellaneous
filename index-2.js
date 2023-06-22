@@ -1,4 +1,59 @@
+/////////////////////async//////////////////////
 
+const express = require('express');
+const app = express();
+const port = 8080;
+
+app.use(express.json());
+
+// Recursive async function to remove null keys from an object
+async function removeNullKeys(obj) {
+  for (const key in obj) {
+    if (obj[key] === null) {
+      delete obj[key];
+    } else if (typeof obj[key] === 'object') {
+      await removeNullKeys(obj[key]);
+    }
+  }
+}
+
+// Middleware to check and remove null values from request body parameters
+app.use(async (req, res, next) => {
+  const deletedParams = {};
+
+  // Iterate over each parameter in the request body
+  for (const param in req.body) {
+    if (req.body[param] === null) {
+      // Delete the null parameter from the request body
+      deletedParams[param] = req.body[param];
+      delete req.body[param];
+    } else if (typeof req.body[param] === 'object') {
+      // Recursively remove null keys from objects
+      await removeNullKeys(req.body[param]);
+    }
+  }
+
+  // Print deleted params to the logs
+  console.log('Deleted params:', deletedParams);
+
+  next();
+});
+
+// Route handler
+app.post('/', (req, res) => {
+  // Process the modified request body
+  console.log('Modified request body:', req.body);
+
+  // Serve the response
+  res.send('Request processed successfully!');
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+///////////////////////////////////
 
 
 
