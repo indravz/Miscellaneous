@@ -1,3 +1,65 @@
+orgapache
+    ================
+    import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+@Service
+public class IddService {
+
+    private final HttpClient httpClient;
+
+    public IddService() {
+        this.httpClient = HttpClientBuilder.create().build();
+    }
+
+    public ResponseEntity<String> getMemberDetails(String loginId, List<String> statuses) {
+        String endpoint = "https://api.example.com/members/" + loginId + "/idds";
+        String joinedStatuses = String.join(",", statuses);
+        String url;
+
+        try {
+            URIBuilder uriBuilder = new URIBuilder(endpoint);
+            uriBuilder.addParameter("statuses", joinedStatuses);
+            url = uriBuilder.build().toString();
+        } catch (URISyntaxException e) {
+            // Handle URI syntax exception
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        HttpGet request = new HttpGet(url);
+
+        try {
+            HttpResponse response = httpClient.execute(request);
+            // Assuming the response body is of string type
+            String responseBody = org.apache.http.util.EntityUtils.toString(response.getEntity());
+            return ResponseEntity.ok(responseBody);
+        } catch (IOException e) {
+            // Handle IO exception
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+}
+
+
+====================
+
+
+
+
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
