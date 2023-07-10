@@ -1,3 +1,6 @@
+ String encodedStatuses = URLEncoder.encode(joinedStatuses, StandardCharsets.UTF_8);
+
+
 orgapache
     ================
     import org.apache.http.HttpResponse;
