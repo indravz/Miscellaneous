@@ -1,3 +1,10 @@
+fields @timestamp, @message
+| filter @message like "[Data]"
+| parse @message /.*\[Data\]\s+((\w+\s+){0,10})/ as data_words
+| fields data_words
+
+
+
 AWS Batch, AWS CloudFormation, AWS DataSync, AWS Lambda, AWS Management Console, AWS Support Center, Amazon API Gateway, Amazon CloudWatch, Amazon Cognito, Amazon Connect, Amazon Inspector, Amazon Location Service, Amazon Redshift, EC2 Image Builder
 
 
