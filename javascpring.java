@@ -1,3 +1,21 @@
+
+// ListService.java
+import java.util.List;
+
+@Service
+public class ListService {
+
+    public List<String> addOneToListItems(List<String> list) {
+        List<String> updatedList = new ArrayList<>();
+        for (String item : list) {
+            int intValue = Integer.parseInt(item);
+            updatedList.add(String.valueOf(intValue + 1));
+        }
+        return updatedList;
+    }
+}
+
+
 // ListController.java
 @RestController
 @RequestMapping("/api")
