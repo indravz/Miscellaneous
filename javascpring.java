@@ -1,4 +1,25 @@
- String encodedStatuses = URLEncoder.encode(joinedStatuses, StandardCharsets.UTF_8);
+// ListController.java
+@RestController
+@RequestMapping("/api")
+public class ListController {
+
+    private final ListService listService;
+
+    public ListController(ListService listService) {
+        this.listService = listService;
+    }
+
+    @PostMapping("/addOne")
+    public ResponseEntity<List<String>> addOneToListItems(@RequestBody List<String> list) {
+        List<String> updatedList = listService.addOneToListItems(list);
+        return ResponseEntity.ok(updatedList);
+    }
+}
+
+
+
+
+String encodedStatuses = URLEncoder.encode(joinedStatuses, StandardCharsets.UTF_8);
 
 
 orgapache
