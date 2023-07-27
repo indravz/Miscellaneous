@@ -1,3 +1,6 @@
+openssl req -in your_csr.csr -noout -text | grep "Subject Alternative Name"
+
+
 openssl req -in your_csr.csr -noout -subject | sed -n 's/.*CN=\(.*\)/\1/p'
 
 
