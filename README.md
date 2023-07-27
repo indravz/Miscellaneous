@@ -1,3 +1,6 @@
+openssl req -in your_csr.csr -noout -subject | sed -n 's/.*CN=\(.*\)/\1/p'
+
+
 fields @timestamp, @message
 | filter @message like "[Data]"
 | parse @message /.*\[Data\]\s+((\w+\s+){0,10})/ as data_words
