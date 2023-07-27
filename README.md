@@ -1,3 +1,5 @@
+openssl x509 -in your_certificate.crt -noout -text | grep "DNS:"
+
 openssl req -in your_csr.csr -noout -text | grep "Subject Alternative Name"
 
 
