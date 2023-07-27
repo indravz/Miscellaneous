@@ -1,3 +1,8 @@
+keytool -genkeypair -v -keystore keystore.jks -keyalg RSA -keysize 2048 -alias new_alias -keypass alias_password -storepass keystore_password
+
+keytool -importcert -v -keystore keystore.jks -alias new_alias -file certificate.pem -storepass keystore_password
+
+
 keytool -delete -alias your_alias -keystore keystore.jks -storepass keystore_password
 
 openssl x509 -in your_certificate.crt -noout -text | grep "DNS:"
