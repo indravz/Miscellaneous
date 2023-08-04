@@ -85,3 +85,35 @@ for (NotificationData data : notificationDataList) {
     data.setDailyChange(dailyChange.toString());
     data.setDailyChangePercentage(dailyChangePercentage.toString());
 }
+888888888888888888888888888888888888888888888888888888888888888888888888888
+    import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+// ...
+
+for (NotificationData data : notificationDataList) {
+    String ticker = data.getSecurity().getTicker();
+    QuotesData quotesData = quotesService.getQuotes(ticker);
+
+    // Assuming quotesData contains a field named 'changeFromPreviousClose'
+    Double changeFromPreviousClose = Double.parseDouble(quotesData.getQuote().getChangeFromPreviousClose());
+
+    // Assuming data contains fields named 'shareQuantity' and 'last'
+    BigDecimal shareQuantity = new BigDecimal(data.getShareQuantity());
+    BigDecimal last = new BigDecimal(quotesData.getQuote().getLast());
+
+    // Calculate the new dailyChange
+    BigDecimal dailyChange = shareQuantity.multiply(BigDecimal.valueOf(changeFromPreviousClose));
+
+    // Calculate the dailyChangePercentage
+    BigDecimal dailyChangePercentage = dailyChange
+            .divide(last.multiply(shareQuantity), 4, RoundingMode.HALF_UP) // To get up to 4 decimal places
+            .multiply(BigDecimal.valueOf(100));
+
+    // Round the dailyChangePercentage to two decimal places
+    dailyChangePercentage = dailyChangePercentage.setScale(2, RoundingMode.HALF_UP);
+
+    // Set the calculated values in the NotificationData object
+    data.setDailyChange(dailyChange.toString());
+    data.setDailyChangePercentage(dailyChangePercentage.toString());
+}
