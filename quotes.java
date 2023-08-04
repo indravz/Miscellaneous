@@ -36,3 +36,21 @@ public class DailyChangeNotificationService {
         return notificationDataList;
     }
 }
+
+
+for (NotificationData data : notificationDataList) {
+    String ticker = data.getSecurity().getTicker();
+    QuotesData quotesData = quotesService.getQuotes(ticker);
+
+    // Assuming quotesData contains a field named 'changeFromPreviousClose'
+    double changeFromPreviousClose = Double.parseDouble(quotesData.getQuote().getChangeFromPreviousClose());
+
+    // Assuming data contains a field named 'shareQuantity'
+    double shareQuantity = Double.parseDouble(data.getShareQuantity());
+
+    // Calculate the new dailyChange
+    double dailyChange = changeFromPreviousClose * shareQuantity;
+
+    // Set the calculated dailyChange in the NotificationData object
+    data.setDailyChange(String.valueOf(dailyChange));
+}
