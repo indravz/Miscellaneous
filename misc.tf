@@ -1,3 +1,30 @@
+provider "aws" {
+  region = "us-east-1"  # Replace with your desired region
+}
+
+resource "aws_iam_policy" "textract_policy" {
+  name        = "TextractDetectDocumentPolicy"
+  description = "Policy to allow DetectDocumentText action in Amazon Textract"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = "textract:DetectDocumentText",
+        Resource = "*"
+      }
+    ],
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach_textract_policy" {
+  policy_arn = aws_iam_policy.textract_policy.arn
+  role       = "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
+}
+
+
+/////////////////////////////
 data "archive_file" "lambda" {
   type        = "zip"
   source_file = "lambda.js"
