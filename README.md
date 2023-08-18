@@ -1,3 +1,27 @@
+fields @logStream, @log
+| stats count() by @logStream, @log
+| sort @logStream asc
+
+
+fields @timestamp, @message
+| filter @message like /error/
+| stats count() as error_count by @message
+| sort error_count desc
+| limit 10
+
+
+fields @timestamp, @request_path, @status_code
+| filter @status_code >= 400
+| stats count() as request_count by @request_path, @status_code
+| sort request_count desc
+
+
+fields @timestamp, @request_path, @status_code
+| filter @status_code >= 400
+| stats count() as request_count by @request_path, @status_code
+| sort request_count desc
+
+
 keytool -genkeypair -v -keystore keystore.jks -keyalg RSA -keysize 2048 -alias new_alias -keypass alias_password -storepass keystore_password
 
 keytool -importcert -v -keystore keystore.jks -alias new_alias -file certificate.pem -storepass keystore_password
