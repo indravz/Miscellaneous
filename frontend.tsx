@@ -7,6 +7,45 @@ const RedirectPage = () => {
   return null;
 };
 
+RedirectPage.getInitialProps = async (ctx) => {
+  const { res, req } = ctx;
+  const { pathname } = req.url;
+  let targetUrl = 'https://www.google.com/default';
+
+  // Define specific redirections based on the route
+  if (pathname === '/home') {
+    targetUrl = 'https://www.google.com/home';
+  } else if (pathname === '/app') {
+    targetUrl = 'https://www.google.com/app';
+  }
+
+  if (res) {
+    // Redirect to the target URL based on the route
+    res.writeHead(302, {
+      Location: targetUrl,
+    });
+    res.end();
+  }
+
+  // This code won't execute on the client side due to server-side rendering.
+  return {};
+};
+
+export default RedirectPage;
+
+
+
+
+
+import { useRouter } from 'next/router';
+
+const RedirectPage = () => {
+  const router = useRouter();
+
+  // This code won't execute on the client side due to server-side rendering.
+  return null;
+};
+
 RedirectPage.getInitialProps = async ({ res, req }) => {
   const { pathname } = req.url;
   let targetUrl = 'https://www.google.com/default';
