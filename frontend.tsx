@@ -1,3 +1,39 @@
+// next.config.js
+module.exports = {
+  // Your existing configuration settings here
+
+  async redirects() {
+    return [
+      {
+        source: '/home',
+        destination: 'https://www.google.com/home',
+        permanent: true,
+      },
+      {
+        source: '/app',
+        destination: 'https://www.google.com/app',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: 'https://www.google.com/about',
+        permanent: true,
+      },
+      // Add a catch-all route to redirect all other routes
+      {
+        source: '/:slug*', // Match any route that hasn't been matched earlier
+        destination: 'https://www.google.com/default', // Your default destination URL
+        permanent: true, // Set to true for a permanent (301) redirect
+      },
+    ];
+  },
+};
+
+
+
+
+
+
 import { useRouter } from 'next/router';
 
 const RedirectPage = () => {
