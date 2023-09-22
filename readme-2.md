@@ -1,4 +1,23 @@
 
+Promotion Agreement and Request
+
+Default (GPT-3.5)
+
+User
+Write on top of email from colleague, agreeing about my reportees promotion and also ask the HR same
+
+ChatGPT
+Subject: Re: Promotion Recommendation for [Employee Name]
+
+Dear [Colleague's Name],
+
+I hope this email finds you well. I wanted to express my wholehearted agreement with your recommendation to promote [Employee Name]. Having closely observed their performance and dedication, I believe this promotion is well-deserved and will undoubtedly benefit our team and the company as a whole.
+
+I'd like to take this opportunity to kindly request that you also forward this recommendation to our HR department for their consideration. [Employee Name]'s contributions have been consistently outstanding, and I believe their promotion aligns with our company's goals and values.
+
+Thank you for your attention to this matter, and I look forward to seeing [Employee Name] continue to excel in their new role.
+
+Best regards,
 Course-aligned Job Duties
 
 
