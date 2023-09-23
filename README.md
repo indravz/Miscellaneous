@@ -1,3 +1,5 @@
+1234
+
 fields @logStream, @log
 | stats count() by @logStream, @log
 | sort @logStream asc
