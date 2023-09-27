@@ -1,3 +1,22 @@
+URI uri = new URI(baseUri + "?accountNumber=" + accountNumber
+        + "&documentType=" + documentType
+        + "&envelopeId=" + envelopeId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #test ifa
 package com.example.demo.model;
 
