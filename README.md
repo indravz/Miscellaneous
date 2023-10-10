@@ -1,3 +1,7 @@
+sudo tcpdump -i eth0 -w capture.pcap port 22
+
+
+
 1234
 
 fields @logStream, @log
