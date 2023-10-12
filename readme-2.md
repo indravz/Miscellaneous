@@ -6,6 +6,9 @@ Great at handling different groups of people, skilled at organizing meetings pro
 Efficiently coordinates with TechRisk to secure approvals, demonstrating a knack for aligning diverse interests and ensuring smooth processes in managing multiple stakeholders and meetings.
 
 
+Mishcat:
+
+Great team player, works efficiently without working into the wee hours. Expert at fixing emergency issues, handling urgent tasks with ease. Possesses a nuanced understanding of authentication. Approachable, eager, and quick, excelling even with challenging timelines.
 
 Promotion Agreement and Request
 
