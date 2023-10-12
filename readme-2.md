@@ -24,10 +24,23 @@ Chris is incredibly helpful, always providing the information needed. His suppor
 I've worked with Nikhil for over 2 years. He's incredibly dedicated, always completing tasks. When I was dealing with DocuSign APIs, he gave me all the right info and access to the portal. Whenever I needed help understanding the code, he was my first choice
 
 
-Raj:
+**Raj:**
 
 Raj is remarkably responsible, consistently taking the lead. Whether it's weekdays or weekends, 
 Whether it's weekdays or weekends, he's there for post-release checkouts. His deep understanding of the entire tech stack shines through. Raj's patience and friendly nature make him a fantastic teammate to collaborate with.
+
+**Satish:**
+Satish is exceptionally hardworking and responsive. His communication is crystal clear. He not only clarifies issues but also ensures users understand the root cause, enabling us to independently resolve problems going forward.
+**
+**
+Sreekanth****
+
+Sreekanth is a natural leader, showing leadership skills even before becoming a supervisor. He's not afraid to ask questions to understand things clearly, and his problem-solving is excellent. He knows how to get things done.
+
+**Tim**
+
+Though I haven't worked with Tim much, he's impressively clear in his questions and prompt when needed.Quick to grasp things, he quickly understood the CSR portal for end-to-end API testing, covering many corner cases and proactively fixing issues ahead of time.
+
 
 Promotion Agreement and Request
 
