@@ -42,6 +42,9 @@ Sreekanth is a natural leader, showing leadership skills even before becoming a 
 Though I haven't worked with Tim much, he's impressively clear in his questions and prompt when needed.Quick to grasp things, he quickly understood the CSR portal for end-to-end API testing, covering many corner cases and proactively fixing issues ahead of time.
 
 
+***Adesh**
+Adesh is incredibly approachable, always ready to assist with clarifications, even if it takes a bit of time, even when the task isn't his. He's eager to learn new things and approaches it with enthusiasm.
+
 Promotion Agreement and Request
 
 Default (GPT-3.5)
