@@ -1,3 +1,11 @@
+Adam:
+
+
+Great at handling different groups of people, skilled at organizing meetings promptly, and ensuring everything runs smoothly. 
+
+Efficiently coordinates with TechRisk to secure approvals, demonstrating a knack for aligning diverse interests and ensuring smooth processes in managing multiple stakeholders and meetings.
+
+
 
 Promotion Agreement and Request
 
