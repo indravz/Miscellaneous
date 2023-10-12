@@ -6,9 +6,28 @@ Great at handling different groups of people, skilled at organizing meetings pro
 Efficiently coordinates with TechRisk to secure approvals, demonstrating a knack for aligning diverse interests and ensuring smooth processes in managing multiple stakeholders and meetings.
 
 
-Mishcat:
+**Mishcat:**
 
 Great team player, works efficiently without working into the wee hours. Expert at fixing emergency issues, handling urgent tasks with ease. Possesses a nuanced understanding of authentication. Approachable, eager, and quick, excelling even with challenging timelines.
+
+**Erfang:**
+
+Erfang is fantastic, super talented and hardworking. He's also friendly, always ready to chat 1-1 and help with problem-solving, providing valuable direction. His skills cover everything from business to front-end, back-end, and infrastructure. I've never seen such talent in one person!
+
+**Chirs:**
+
+Chris is incredibly helpful, always providing the information needed. His support after moving to a different team, especially with  Kong, was super helpful. When I lacked a folio laptop, he was my go-to person for debugging on-prem access issues.Total gem.
+
+
+**Nikhil:**
+
+I've worked with Nikhil for over 2 years. He's incredibly dedicated, always completing tasks. When I was dealing with DocuSign APIs, he gave me all the right info and access to the portal. Whenever I needed help understanding the code, he was my first choice
+
+
+Raj:
+
+Raj is remarkably responsible, consistently taking the lead. Whether it's weekdays or weekends, 
+Whether it's weekdays or weekends, he's there for post-release checkouts. His deep understanding of the entire tech stack shines through. Raj's patience and friendly nature make him a fantastic teammate to collaborate with.
 
 Promotion Agreement and Request
 
