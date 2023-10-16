@@ -5,6 +5,7 @@ Great at handling different groups of people, skilled at organizing meetings pro
 
 Efficiently coordinates with TechRisk to secure approvals, demonstrating a knack for aligning diverse interests and ensuring smooth processes in managing multiple stakeholders and meetings.
 
+Adam is good at bringing people together. To help the security team, he can make clear documents about control gates—explaining steps, roles, and how to handle issues. Keeping these papers updated and working with the team will make everything smoother, reducing problems during control gates.
 
 **Mishcat:**
 
