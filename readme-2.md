@@ -19,6 +19,8 @@ Erfang is fantastic, super talented and hardworking. He's also friendly, always 
 
 Chris is incredibly helpful, always providing the information needed. His support after moving to a different team, especially with  Kong, was super helpful. When I lacked a folio laptop, he was my go-to person for debugging on-prem access issues.Total gem.
 
+ I haven't collaborated much with Chris this year, and he's mentioned not having extensive business knowledge. It could be helpful for him to explore opportunities for learning more about the business aspects relevant to our work. This might contribute to a more well-rounded and informed team dynamic.
+
 
 **Nikhil:**
 
