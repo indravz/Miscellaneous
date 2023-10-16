@@ -15,6 +15,11 @@ Great team player, works efficiently without working into the wee hours. Expert 
 
 Erfang is fantastic, super talented and hardworking. He's also friendly, always ready to chat 1-1 and help with problem-solving, providing valuable direction. His skills cover everything from business to front-end, back-end, and infrastructure. I've never seen such talent in one person!
 
+I appreciate Erfang for providing numerous career-boosting opportunities. However, there are areas for improvements
+
+when tasks are assigned to others, he tends to work on them even if we're still on schedule, which creates bit of confusion.
+He leans heavily toward prioritizing application development, sometimes seeming to undervalue non-application development work.
+
 **Chirs:**
 
 Chris is incredibly helpful, always providing the information needed. His support after moving to a different team, especially with  Kong, was super helpful. When I lacked a folio laptop, he was my go-to person for debugging on-prem access issues.Total gem.
