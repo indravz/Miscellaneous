@@ -1,3 +1,5 @@
+if (requestUrl.matches("/restapi/members/\\{[a-zA-Z0-9]+\\}/alerts")) 
+
 To check if multicast is working fine between two EC2 instances in a Virtual Private Cloud (VPC), you can follow these steps:
 
 1. **Enable Multicast Support on VPC**:
