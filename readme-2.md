@@ -1,3 +1,31 @@
+import java.util.regex.*;
+
+// Define the request URL
+String requestUrl = "/restapi/members/abc123/alerts"; // Replace with your actual URL
+
+// Define the regex pattern with a more meaningful variable name
+String urlPattern = "/restapi/members/([a-zA-Z0-9]+)/alerts";
+
+// Create a Pattern object
+Pattern regex = Pattern.compile(urlPattern);
+
+// Create a Matcher object
+Matcher matcher = regex.matcher(requestUrl);
+
+// Check if the request URL matches the pattern
+if (matcher.matches()) {
+    // The request URL matches the expected format
+    // You can proceed with your code here
+    // You can also extract the login ID using matcher.group(1)
+    String loginId = matcher.group(1);
+} else {
+    // The request URL does not match the expected format
+    // Handle the case where the URL format is incorrect
+}
+
+
+
+
 if (requestUrl.matches("/restapi/members/\\{[a-zA-Z0-9]+\\}/alerts")) 
 
 To check if multicast is working fine between two EC2 instances in a Virtual Private Cloud (VPC), you can follow these steps:
