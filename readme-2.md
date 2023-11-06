@@ -88,6 +88,8 @@ Adam is good at bringing people together. To help the security team, he can make
 
 Great team player, works efficiently without working into the wee hours. Expert at fixing emergency issues, handling urgent tasks with ease. Possesses a nuanced understanding of authentication. Approachable, eager, and quick, excelling even with challenging timelines.
 
+Your team collaboration in documentation was impressive. To enhance impact, strive for transparent communication on work progress and actively share your innovative ideas. Engaging in this way will boost team synergy and amplify your valuable contributions
+
 **Erfang:**
 
 Erfang is fantastic, super talented and hardworking. He's also friendly, always ready to chat 1-1 and help with problem-solving, providing valuable direction. His skills cover everything from business to front-end, back-end, and infrastructure. I've never seen such talent in one person!
