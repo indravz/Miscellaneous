@@ -1,3 +1,15 @@
+data "aws_ami" "example" {
+  most_recent = true
+
+  filter {
+    name   = "tag:YourTagName"  # Replace YourTagName with the actual tag key
+    values = ["YourTagValue"]  # Replace YourTagValue with the actual tag value
+  }
+
+  owners = ["self"]  # Filter for AMIs owned by yourself, change if necessary
+}
+
+
 sudo tcpdump -i eth0 -w capture.pcap port 22
 
 
