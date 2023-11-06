@@ -93,6 +93,8 @@ Your team collaboration in documentation was impressive. To enhance impact, stri
 
  Your key role in presenting features, conducting client demos, and implementing iterative changes showcases your commitment to driving collaborative success. Your dedication to timely delivery, coupled with a client-centric focus, underscores your integral role in fostering integrity-driven client services and delivering innovative solutions."
 
+ n your pursuit of learning technical skills, your dedication stands out. Yet, there's an opportunity to expand your knowledge within the custody industry. Understanding this sector better could significantly enhance your work's impact on the advisor-advisee relationship. By furthering your comprehension of this industry, you can effectively align your technical expertise with the industry's needs, ultimately strengthening your contributions and how they resonate within the advisor-advisee dynamic
+
 **Erfang:**
 
 Erfang is fantastic, super talented and hardworking. He's also friendly, always ready to chat 1-1 and help with problem-solving, providing valuable direction. His skills cover everything from business to front-end, back-end, and infrastructure. I've never seen such talent in one person!
