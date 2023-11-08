@@ -1,3 +1,16 @@
+
+#!/bin/bash
+
+file_path="path_to_your_file.txt"  # Replace with your file's path
+
+cat << EOF >> "$file_path"
+This is line 1 to add.
+This is line 2 to add.
+This is line 3 to add.
+EOF
+
+
+
 data "aws_ami" "example" {
   most_recent = true
 
