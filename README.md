@@ -1,3 +1,13 @@
+#!/bin/bash
+
+file_path="path_to_your_file.txt"  # Replace with your file's path
+actual_ip=$(curl -s ifconfig.me)  # Fetching the actual IP using ifconfig.me
+
+cat << EOF >> "$file_path"
+This is line 1 to add.
+This is line 2 to add.
+My IP is $actual_ip, please substitute accordingly.
+EOF
 
 #!/bin/bash
 
