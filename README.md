@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Check for unmounted EBS volumes
+unmounted=$(lsblk -o NAME,MOUNTPOINT | grep -Ev '^NAME|MOUNTPOINT' | grep -v '/')
+
+# Output the unmounted volumes
+echo "$unmounted"
+
+
+#!/bin/bash
+
+# User Data script to mount unmounted EBS volumes
+sudo su -
+
+# Mount unmounted volumes (replace /dev/xvdf and /mnt/ebsvolume with your appropriate details)
+mount /dev/xvdf /mnt/ebsvolume
+
+#!/bin/bash
+
 file_path="path_to_your_file.txt"  # Replace with your file's path
 actual_ip=$(curl -s ifconfig.me)  # Fetching the actual IP using ifconfig.me
 
