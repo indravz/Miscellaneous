@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# Find the EBS volume that is not mounted
+device=$(lsblk -o NAME,MOUNTPOINT | grep -E '^\w' | awk '$2 == "" {print $1; exit}')
+
+if [ -n "$device" ]; then
+    # Create a directory to use as a mount point
+    mount_dir="/mnt/ebsvolume"
+    sudo mkdir -p "$mount_dir"
+
+    # Mount the EBS volume to the mount point
+    sudo mount "/dev/$device" "$mount_dir"
+
+    # Output success message
+    echo "Mounted /dev/$device at $mount_dir"
+else
+    echo "No unmounted EBS volumes found."
+fi
+
+
+
+#!/bin/bash
+
 # Check for unmounted EBS volumes
 unmounted=$(lsblk -o NAME,MOUNTPOINT | grep -Ev '^NAME|MOUNTPOINT' | grep -v '/')
 
