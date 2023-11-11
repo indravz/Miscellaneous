@@ -1,4 +1,31 @@
+// Assuming host is a String variable and ENV is a String variable representing the environment
 
+String host;
+String ENV = "prod"; // Set ENV to "prod" or "uat" based on your environment
+
+if ("prod".equals(ENV)) {
+    // Use abcsolutions.google.com for the production environment
+    host = "abcsolutions.google.com";
+} else if ("uat".equals(ENV)) {
+    // Use uat.abcsolutions.google.com for the UAT environment
+    host = "uat.abcsolutions.google.com";
+} else {
+    // Handle other environments if needed
+    host = "default.host.com";
+}
+
+// Now, you can use the 'host' variable in your modified if condition
+if (host.equals(host)) {
+    // Code to be executed if the condition is true for the determined host based on the environment
+    System.out.println("Host is " + host);
+} else {
+    // Code to be executed if the condition is false
+    System.out.println("Host is not " + host);
+}
+
+
+
+///////////////////
 // ListService.java
 import java.util.List;
 
