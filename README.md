@@ -1,3 +1,30 @@
+
+#!/bin/bash
+
+# Redirect output to a log file
+exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
+
+echo "User-data script started at $(date)"
+
+# Add files
+echo "Adding files..."
+echo "File content" > /path/to/your/file.txt
+cp /path/to/your/local/file /path/to/destination/file
+
+# Run some commands
+echo "Running commands..."
+apt-get update
+apt-get install -y your-package
+
+# Add more debugging information
+echo "Printing environment variables..."
+printenv
+
+echo "User-data script completed at $(date)"
+
+
+
+
 #!/bin/bash
 
 # Find the EBS volume that is not mounted
