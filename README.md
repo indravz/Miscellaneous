@@ -1,3 +1,25 @@
+Hello, 
+
+please join the meeting with me 
+
+Meeting title: AWS Support Conference Bridge
+Personalized ID: 1321562250
+Meeting ID: 1321 56 2250
+Hosting Region: Ireland
+URL Link: https://chime.aws/1321562250
+US dial-in: +1 206-462-5569
+US toll-free dial-in: +1 855-552-4463
+International dial-in numbers: https://chime.aws/dialinnumbers/
+
+We value your feedback. Please share your experience by rating this and other correspondences in the AWS Support Center. You can rate a correspondence by selecting the stars in the top right corner of the correspondence.
+
+Best regards,
+Zhan
+Amazon Web Services
+=============================================================== 
+
+
+
 
 #!/bin/bash
 
