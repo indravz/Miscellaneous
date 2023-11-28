@@ -1,3 +1,10 @@
+if (headerValue != null && !headerValue.isEmpty()) {
+            return methodWithHeader();
+        } else {
+            return methodWithoutHeader();
+        }
+
+
 // Assuming host is a String variable and ENV is a String variable representing the environment
 
 String host;
