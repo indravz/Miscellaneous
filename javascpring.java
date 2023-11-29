@@ -1,4 +1,15 @@
-
+@PostMapping("/create")
+    public String handleRequest(@RequestParam(name = "flag", required = false) Boolean flag) {
+        if (flag == null) {
+            // Case when the parameter is not passed
+            return "No flag provided.";
+        } else if (flag) {
+            // Case when flag is true
+            return "Flag is true.";
+        } else {
+            // Case when flag is false
+            return "Flag is false.";
+        }
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
