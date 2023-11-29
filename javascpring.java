@@ -1,3 +1,35 @@
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MyController {
+
+    @PostMapping("/create")
+    public String handleRequest(@RequestParam(name = "type", required = false) String type) {
+        if (type != null && type.equals("serviceA")) {
+            // Call ServiceA
+            return serviceA();
+        } else {
+            // Call ServiceB
+            return serviceB();
+        }
+    }
+
+    private String serviceA() {
+        // Logic for ServiceA
+        return "Service A called.";
+    }
+
+    private String serviceB() {
+        // Logic for ServiceB
+        return "Service B called.";
+    }
+}
+
+
+
 if (headerValue != null && !headerValue.isEmpty()) {
             return methodWithHeader();
         } else {
