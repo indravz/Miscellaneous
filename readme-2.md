@@ -1,3 +1,7 @@
+https://www.linkedin.com/learning-login/share?forceAccount=false&redirect=https%3A%2F%2Fwww.linkedin.com%2Flearning%2Flearning-google-cloud-run%3Ftrk%3Dshare_ent_url%26shareId%3DqLPs1ThZTrSSpWt6uWsSrw%253D%253D
+
+
+
 Please joing the meeting link below:
 
 Meeting ID: 5779130823 
