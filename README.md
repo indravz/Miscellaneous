@@ -1,3 +1,21 @@
+#!/bin/bash
+
+# Get the host IP address
+host_ip=$(hostname -I | awk '{print $1}')
+
+# Add 'master tcp <host ip> 8100' to /etc/sybase/interfaces
+echo "master tcp $host_ip 8100" | sudo tee -a /etc/sybase/interfaces > /dev/null
+
+# Replace 'fndc1' with 'fnndc2' globally in the file /etc/sybase/config
+sudo sed -i 's/fndc1/fnndc2/g' /etc/sybase/config
+
+# Run command 'startsybase' and sleep for 100 seconds
+startsybase &
+sleep 100
+
+
+
+
 Subject: Confirmed Completion of Master's Degree: Elevating My Candidacy for Promotion
 
 Dear [Recipient's Name],
