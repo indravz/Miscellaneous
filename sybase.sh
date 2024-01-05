@@ -43,3 +43,28 @@ mount_volumes() {
 
 # Call the mount function with the provided volume IDs
 mount_volumes "vol-9182792" "vol9188639" "vol-12345"
+
+
+
+
+
+
+#!/bin/bash
+
+# Store script arguments in variables
+arg1="$1"
+arg2="$2"
+arg3="$3"
+
+# Function to mount EBS volumes based on provided volume IDs
+mount_volumes() {
+  local vol1="$1"
+  local vol2="$2"
+  local vol3="$3"
+
+  # Your function logic using vol1, vol2, vol3...
+}
+
+# Call the function with the stored arguments
+mount_volumes "$arg1" "$arg2" "$arg3"
+
