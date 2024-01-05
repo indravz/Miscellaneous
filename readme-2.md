@@ -1,3 +1,5 @@
+https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#key-policy-default-allow-root-enable-iam
+
 curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key
 
 
