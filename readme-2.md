@@ -15,6 +15,11 @@ aws lambda add-permission \
 
 Produces:
 
+{
+    "Statement": "{\"Sid\":\"dacebf47-934f-5cef-8520-f7b3024ef570\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"apigateway.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-2:767925479794:function:upload-images-lambda\",\"Condition\":{\"ArnLike\":{\"AWS:SourceArn\":\"arn:aws:execute-api:us-east-2:767925479794:zb5vom8voh///{path+}\"}}}"
+}
+
+
 
 {
   "StatementId": "dacebf47-934f-5cef-8520-f7b3024ef570",
