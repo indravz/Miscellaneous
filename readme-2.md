@@ -1,3 +1,32 @@
+Payload format version
+The parsing algorithm for the payload sent to and returned from your Lambda function. Learn more.
+2.0 (interpreted response format)
+Invoke permissions
+The resource policy of the Lambda function determines if API Gateway can invoke it. You can run the AWS CLI command snippet below to give API Gateway permission to invoke your AWS Lambda function.
+
+Example policy statement
+
+aws lambda add-permission \
+ --statement-id dacebf47-934f-5cef-8520-f7b3024ef570 \
+ --action lambda:InvokeFunction \
+ --function-name "arn:aws:lambda:us-east-2:767925479794:function:upload-images-lambda" \
+ --principal apigateway.amazonaws.com \
+ --source-arn "arn:aws:execute-api:us-east-2:767925479794:zb5vom8voh/*/*/{path+}"
+
+Produces:
+
+
+{
+  "StatementId": "dacebf47-934f-5cef-8520-f7b3024ef570",
+  "Action": "lambda:InvokeFunction",
+  "FunctionName": "arn:aws:lambda:us-east-2:767925479794:function:upload-images-lambda",
+  "Principal": "apigateway.amazonaws.com",
+  "SourceArn": "arn:aws:execute-api:us-east-2:767925479794:zb5vom8voh/*/*/{path+}"
+}
+Timeout
+The number of milliseconds that API Gateway should wait for a response from the integration before timing out.
+30000
+
 https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#key-policy-default-allow-root-enable-iam
 
 curl http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key
