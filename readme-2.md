@@ -1,3 +1,20 @@
+Record name
+gscs.dapaws.foliofn.com
+Record type
+A
+Value
+d2z9m98t8pyhsw.cloudfront.net.
+
+
+
+gscs.eapaws.foliofn.com
+Record type
+A
+Value
+d3uedgk46v0t3l.cloudfront.net.
+
+
+
 Payload format version
 The parsing algorithm for the payload sent to and returned from your Lambda function. Learn more.
 2.0 (interpreted response format)
