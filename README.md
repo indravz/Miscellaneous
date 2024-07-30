@@ -1,3 +1,9 @@
+ List<String> itemsToAdd = Stream.of("AM@R:", "TR@R:", "MM@R:", "AC@R:")
+                                        .map(prefix -> prefix + repCode)
+                                        .collect(Collectors.toList())
+                                        
+                                        
+                                        
 #!/bin/bash
 
 # Get the host IP address
