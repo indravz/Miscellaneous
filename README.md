@@ -1,3 +1,14 @@
+// Assuming tokens is a List or Collection of items
+List<Type> view = new ArrayList<>();
+Set<Type> uniqueItems = new HashSet<>(view); // Initialize with existing items
+
+uniqueItems.addAll(tokens); // Add all items from tokens to the set
+
+view.clear(); // Clear the original list
+view.addAll(uniqueItems); // Add back the unique items to the list
+
+ 
+ 
  List<String> itemsToAdd = Stream.of("AM@R:", "TR@R:", "MM@R:", "AC@R:")
                                         .map(prefix -> prefix + repCode)
                                         .collect(Collectors.toList())
