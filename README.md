@@ -21,6 +21,49 @@ public class Entitlements {
 public class Main {
     public static void main(String[] args) {
         Entitlements entitlements = new Entitlements();
+        List<String> initialTokens = Arrays.asList("item1", "item2");
+        entitlements.getView().addAll(initialTokens); // Add some initial tokens to the view
+
+        List<String> newTokens = Arrays.asList("item2", "item3", "item4");
+
+        // Combine existing view items and new tokens to ensure uniqueness
+        Set<String> uniqueItems = new HashSet<>(entitlements.getView());
+        uniqueItems.addAll(newTokens);
+
+        // Update the view list with the unique items
+        entitlements.getView().clear();
+        entitlements.getView().addAll(uniqueItems);
+
+        // Print the updated view list
+        System.out.println(entitlements.getView());
+    }
+}
+
+
+
+import java.util.*;
+
+public class Entitlements {
+    private List<String> view;
+
+    public Entitlements() {
+        this.view = new ArrayList<>();
+    }
+
+    public List<String> getView() {
+        return view;
+    }
+
+    public void setView(List<String> view) {
+        this.view = view;
+    }
+
+    // Assuming you have other fields and methods
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Entitlements entitlements = new Entitlements();
         List<String> tokens = Arrays.asList("item1", "item2", "item3", "item2");
 
         // Convert the existing view list to a set to ensure uniqueness
