@@ -1,3 +1,9 @@
+select * from ftc_member_role_assignment where grouptype_cd='R'
+select *
+
+
+
+
 List<String> uniqueItems = Stream.concat(entitlements.getView().stream(), newTokens.stream())
                                           .distinct()
                                           .collect(Collectors.toList());
