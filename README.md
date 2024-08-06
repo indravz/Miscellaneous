@@ -1,3 +1,9 @@
+List<String> uniqueItems = Stream.concat(entitlements.getView().stream(), newTokens.stream())
+                                          .distinct()
+                                          .collect(Collectors.toList());
+                                          
+
+
 import java.util.*;
 
 public class Entitlements {
