@@ -1,3 +1,14 @@
+provider "aws" {
+  region = "us-west-2"
+}
+
+data "aws_caller_identity" "current" {}
+
+variable "region" {
+  default = "us-west-2"
+}
+
+# Existing DynamoDB table
 resource "aws_dynamodb_table" "example" {
   name         = "YourTableName"
   hash_key     = "PrimaryKey"
@@ -7,46 +18,37 @@ resource "aws_dynamodb_table" "example" {
     name = "PrimaryKey"
     type = "S"
   }
-
-  # Existing table configuration here
-
-  # Attach resource-based policy
-  stream_enabled = false
 }
 
-resource "aws_dynamodb_table_item" "example_item" {
-  table_name = aws_dynamodb_table.example.name
-  hash_key   = "PrimaryKey"
-
-  item = <<ITEM
-{
-  "PrimaryKey": {"S": "ExampleItem"},
-  "SomeAttribute": {"S": "Value"}
-}
-ITEM
-}
-
-resource "aws_dynamodb_table_policy" "dynamodb_policy" {
-  table_name = aws_dynamodb_table.example.name
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect    = "Allow"
-        Principal = {
-          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/YourExistingRoleName"
-        }
-        Action    = [
-          "dynamodb:GetItem",
-          "dynamodb:PutItem",
-          "dynamodb:UpdateItem",
-          "dynamodb:DeleteItem",
-          "dynamodb:Query",
-          "dynamodb:Scan"
-        ]
-        Resource  = "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.example.name}"
-      }
+# IAM policy document
+data "aws_iam_policy_document" "test" {
+  statement {
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem",
+      "dynamodb:DeleteItem",
+      "dynamodb:Query",
+      "dynamodb:Scan"
     ]
-  })
+
+    principals {
+      type        = "AWS"
+      identifiers = [
+        "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/YourExistingRoleName"
+      ]
+    }
+
+    resources = [
+      aws_dynamodb_table.example.arn
+    ]
+
+    effect = "Allow"
+  }
+}
+
+# Resource-based policy for DynamoDB table
+resource "aws_dynamodb_resource_policy" "example" {
+  resource_arn = aws_dynamodb_table.example.arn
+  policy       = data.aws_iam_policy_document.test.json
 }
