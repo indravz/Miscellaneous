@@ -1,3 +1,49 @@
+resource "aws_ssm_document" "update_email_record" {
+  name          = "UpdateEmailRecord"
+  document_type  = "Automation"
+  content = jsonencode({
+    schemaVersion = "2.2"
+    description   = "Update email field in DynamoDB table record"
+    parameters = {
+      table_name = {
+        type        = "String"
+        description = "The name of the DynamoDB table"
+      }
+      partition_key_value = {
+        type        = "String"
+        description = "The value of the partition key"
+      }
+      new_email = {
+        type        = "String"
+        description = "The new email address to set"
+      }
+    }
+    mainSteps = [
+      {
+        action = "aws:runCommand"
+        name   = "updateDynamoDBRecord"
+        inputs = {
+          DocumentName = "AWS-RunShellScript"
+          Parameters = {
+            commands = [
+              "#!/bin/bash",
+              "aws dynamodb update-item \\",
+              "    --table-name {{ table_name }} \\",
+              "    --key '{\"invitationId\": {\"S\": \"{{ partition_key_value }}\"}}' \\",
+              "    --update-expression 'SET email = :newEmail' \\",
+              "    --expression-attribute-values '{\":newEmail\": {\"S\": \"{{ new_email }}\"}}'"
+            ]
+          }
+        }
+      }
+    ]
+  })
+}
+
+
+@@@@@@@@@@@@@@@@
+
+
 schemaVersion: '2.2'
 description: Update email field in DynamoDB table record
 mainSteps:
