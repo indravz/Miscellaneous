@@ -1,3 +1,25 @@
+schemaVersion: '2.2'
+description: Update email field in DynamoDB table record
+mainSteps:
+  - action: aws:runCommand
+    name: updateDynamoDBRecord
+    inputs:
+      DocumentName: AWS-RunShellScript
+      Parameters:
+        commands:
+          - '#!/bin/bash'
+          - aws dynamodb update-item \
+            --table-name YourTableName \
+            --key '{"invitationId": {"S": "PartitionKeyValue"}}' \
+            --update-expression 'SET email = :newEmail' \
+            --expression-attribute-values '{":newEmail": {"S": "NewEmailValue"}}'
+
+
+@@@@@@@@@@@@@@@@@
+
+
+
+
 provider "aws" {
   region = "us-west-2"
 }
