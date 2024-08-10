@@ -1,3 +1,41 @@
+resource "aws_iam_policy" "dynamodb_rw_policy" {
+  name        = "DynamoDBReadWritePolicy"
+  description = "Policy to allow read and write access to all DynamoDB tables"
+  policy      = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:Query",
+          "dynamodb:Scan"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/*"
+      }
+    ]
+  })
+}
+
+
+resource "aws_iam_role_policy_attachment" "dynamodb_rw_policy_attachment" {
+  role       = "your_existing_role_name"
+  policy_arn = aws_iam_policy.dynamodb_rw_policy.arn
+}
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+
+
+
+
+
 select * from ftc_member_role_assignment where grouptype_cd='R'
 select *
 
