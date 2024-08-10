@@ -1,3 +1,13 @@
+{
+  "table_name": "invitations",
+  "partition_key": "invitationid",
+  "partition_value": "12345",
+  "field_name": "email",
+  "field_value": "abc@gmail.com"
+}
+
+
+
 import boto3
 
 def lambda_handler(event, context):
