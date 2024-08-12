@@ -1,3 +1,9 @@
+SELECT m.*
+FROM member m
+JOIN ftc_role_assignments fta ON m.memberoid = fta.memberoid
+WHERE fta.role_name = 'ABCD';
+
+
 resource "aws_dynamodb_table" "example" {
   name         = "YourTableName"
   hash_key     = "PrimaryKey"
