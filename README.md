@@ -1,6 +1,13 @@
 SELECT m.*
 FROM member m
 JOIN ftc_role_assignments fta ON m.memberoid = fta.memberoid
+WHERE fta.role_name = 'ABCD'
+AND m.compcode = 'abcd';
+
+
+SELECT m.*
+FROM member m
+JOIN ftc_role_assignments fta ON m.memberoid = fta.memberoid
 WHERE fta.role_name = 'ABCD';
 
 
