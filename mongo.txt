@@ -1,0 +1,287 @@
+Let's update the Spring Boot application and Terraform configuration to use Maven for building the project. The application will connect to MongoDB to create a list of databases and custom roles, using environment variables to manage the MongoDB connection string.
+
+### Maven Project Setup
+
+#### Step 1: Create a Spring Boot Project with Maven
+
+You can create a new Spring Boot project using the [Spring Initializr](https://start.spring.io/) with the following settings:
+
+- **Project:** Maven Project
+- **Language:** Java
+- **Spring Boot Version:** Latest stable version
+- **Dependencies:** Spring Web, Spring Data MongoDB
+
+Download and unzip the project, then open it in your preferred IDE.
+
+#### Step 2: Update `pom.xml`
+
+Ensure your `pom.xml` includes the necessary dependencies and plugin for packaging the project:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>mongoops</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>mongoops</name>
+    <description>Spring Boot MongoDB Lambda Function</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <java.version>11</java.version>
+    </properties>
+
+    <dependencies>
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Spring Data MongoDB -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+
+        <!-- AWS Lambda Core -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-lambda-java-core</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
+        <!-- AWS Lambda Java Events -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-lambda-java-events</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.springframework.cloud.function.adapter.aws.FunctionInvoker</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+```
+
+### Explanation
+
+- **Spring Boot and MongoDB Dependencies:** These dependencies provide the necessary libraries to run a Spring Boot application and connect to MongoDB.
+- **AWS Lambda Core and Events:** These are required for integrating with AWS Lambda.
+- **Maven Shade Plugin:** This plugin is used to create a fat jar, which bundles all the dependencies, making it easier to deploy to AWS Lambda.
+
+### Step 3: Create the Lambda Handler
+
+Create a Java class `MongoLambdaHandler` to handle the Lambda requests:
+
+```java
+package com.example.mongoops;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+@Component
+public class MongoLambdaHandler implements RequestHandler<Object, String> {
+
+    @Override
+    public String handleRequest(Object input, Context context) {
+        // Retrieve the MongoDB connection string from environment variables
+        String connectionString = System.getenv("MONGO_URI");
+
+        // Create a MongoDB client
+        try (MongoClient mongoClient = MongoClients.create(connectionString)) {
+            // List of databases to be created
+            String[] databases = {"database1", "database2", "database3"};
+
+            // Create the specified databases
+            for (String dbName : databases) {
+                createDatabase(mongoClient, dbName, context);
+            }
+
+            // Create custom roles
+            createCustomRoles(mongoClient, context);
+
+            return "Databases and custom roles created successfully.";
+        } catch (Exception e) {
+            context.getLogger().log("Error: " + e.getMessage());
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    private void createDatabase(MongoClient mongoClient, String dbName, Context context) {
+        // Get or create a database
+        MongoDatabase database = mongoClient.getDatabase(dbName);
+        // Create a collection to ensure the database is created
+        database.createCollection("defaultCollection");
+        context.getLogger().log("Created database: " + dbName);
+    }
+
+    private void createCustomRoles(MongoClient mongoClient, Context context) {
+        // Example of creating a custom role
+        String role = "customRole";
+        mongoClient.getDatabase("admin").runCommand(new Document("createRole", role)
+                .append("privileges", Arrays.asList(new Document("resource", new Document("db", "database1").append("collection", ""))
+                        .append("actions", Arrays.asList("find", "insert", "update"))))
+                .append("roles", Arrays.asList(new Document("role", "readWrite").append("db", "database1"))));
+        context.getLogger().log("Created custom role: " + role);
+    }
+}
+```
+
+### Explanation
+
+- **MongoClient:** Used to connect to MongoDB using the connection string retrieved from the environment variable.
+- **createDatabase:** This method ensures a database is created by adding a collection. MongoDB creates a database when a collection is created within it.
+- **createCustomRoles:** This method creates custom roles with specific privileges and actions using MongoDB's command interface.
+
+### 2. Terraform Configuration
+
+We'll use Terraform to deploy the Lambda function and set the necessary environment variables.
+
+#### Step 1: Define the AWS Provider
+
+Create a `main.tf` file and specify the AWS provider:
+
+```hcl
+provider "aws" {
+  region = "us-east-1"  # Change to your preferred region
+}
+```
+
+#### Step 2: Create an IAM Role for the Lambda Function
+
+```hcl
+resource "aws_iam_role" "lambda_exec_role" {
+  name = "lambda-mongo-exec-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_policy" "lambda_policy" {
+  name        = "lambda-mongo-policy"
+  description = "Policy to allow Lambda function to interact with MongoDB"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_policy_attach" {
+  policy_arn = aws_iam_policy.lambda_policy.arn
+  role       = aws_iam_role.lambda_exec_role.name
+}
+```
+
+#### Step 3: Define the Lambda Function
+
+```hcl
+resource "aws_lambda_function" "mongo_lambda" {
+  function_name = "mongoOpsLambda"
+  role          = aws_iam_role.lambda_exec_role.arn
+  handler       = "com.example.mongoops.MongoLambdaHandler::handleRequest"
+  runtime       = "java11" # Ensure this matches your Java version
+
+  environment {
+    variables = {
+      MONGO_URI = "mongodb://<username>:<password>@<host>:<port>?authSource=admin"
+    }
+  }
+
+  # Upload your compiled Spring Boot jar as a ZIP file
+  filename         = "target/mongoops-1.0.0.jar"
+  source_code_hash = filebase64sha256("target/mongoops-1.0.0.jar")
+}
+```
+
+### Explanation
+
+- **aws_iam_role:** Creates an IAM role for the Lambda function.
+- **aws_iam_policy:** Defines a policy that allows the Lambda function to write logs.
+- **aws_lambda_function:** Configures the Lambda function and specifies the handler and environment variables.
+
+### 3. Build and Deploy
+
+1. **Build the Spring Boot Application:**
+
+
+   Use Maven to build your application and package it as a jar:
+
+   ```shell
+   mvn clean package
+   ```
+
+2. **Deploy with Terraform:**
+
+   ```shell
+   terraform init
+   terraform apply
+   ```
+
+This configuration sets up a Lambda function using Spring Boot to create MongoDB databases and custom roles. It retrieves the MongoDB connection string from environment variables for better security and flexibility. Make sure to replace `<username>`, `<password>`, `<host>`, and `<port>` in the Terraform file with your actual MongoDB credentials and connection details.
