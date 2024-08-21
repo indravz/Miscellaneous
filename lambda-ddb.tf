@@ -1,3 +1,28 @@
+resource "mongodb_db_role" "example_role" {
+  name     = "myCustomRole"
+  database = "my_database"
+
+  # Allow all necessary operations within the "my_database"
+  privilege {
+    db         = "my_database"
+    collection = ""  # This applies the privilege to the entire database
+    actions = [
+      "listCollections",
+      "createCollection",
+      "createIndex",
+      "dropIndex",
+      "insert",
+      "remove",
+      "renameCollectionSameDB",
+      "update"
+    ]
+  }
+
+  # Restrict the ability to create new databases by not granting any global permissions
+}
+
+
+
 ///////////
 import boto3
 from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
