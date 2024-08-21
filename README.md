@@ -1,3 +1,29 @@
+resource "mongodb_db_role" "example_role" {
+  name     = "myCustomRole"
+  database = "my_database"
+
+  # Allow all necessary operations within the "my_database"
+  privilege {
+    db         = "my_database"
+    collection = ""  # This applies the privilege to the entire database
+    actions = [
+      "listCollections",
+      "createCollection",
+      "createIndex",
+      "dropIndex",
+      "insert",
+      "remove",
+      "renameCollectionSameDB",
+      "update"
+    ]
+  }
+
+  # Restrict the ability to create new databases by not granting any global permissions
+}
+
+
+
+
 SELECT m.*
 FROM member m
 JOIN ftc_role_assignments fta ON m.memberoid = fta.memberoid
