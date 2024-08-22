@@ -1,3 +1,72 @@
+resource "mongodbatlas_custom_db_role" "custom_db_role" {
+  project_id = "<PROJECT-ID>"
+  role_name  = "FullAccessToSpecificDB"
+
+  # Full access to the specific database (except creating databases)
+  actions {
+    action = "FIND"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "INSERT"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "UPDATE"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "REMOVE"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "CREATE_COLLECTION"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "CREATE_INDEX"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "DROP_INDEX"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+  actions {
+    action = "RENAME_COLLECTION_SAME_DB"
+    resources {
+      collection_name = ""
+      database_name   = "specificDatabase"
+    }
+  }
+
+  # Restrict actions in other databases
+  # No actions are provided for other databases, so by default, no access is granted
+}
+
+
+
+///////////////////////////////////////////
 resource "mongodb_db_role" "example_role" {
   name     = "myCustomRole"
   database = "my_database"
