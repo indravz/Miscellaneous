@@ -1,4 +1,59 @@
+Automating the retrieval of DynamoDB tables in Terraform requires using external data sources or scripts. Since Terraform doesn’t natively support listing all DynamoDB tables directly, you can use an external script to query the list of tables and then pass that data into Terraform.
 
+Here’s an example using an external data source with a Python script:
+
+### 1. Python Script to List DynamoDB Tables
+Create a Python script (`list_dynamodb_tables.py`) that lists all DynamoDB tables:
+
+```python
+import boto3
+import json
+
+def list_dynamodb_tables():
+    dynamodb = boto3.client('dynamodb')
+    tables = dynamodb.list_tables()['TableNames']
+    
+    result = []
+    for table in tables:
+        table_info = dynamodb.describe_table(TableName=table)
+        result.append({
+            "name": table,
+            "arn": table_info['Table']['TableArn']
+        })
+    
+    return result
+
+if __name__ == "__main__":
+    tables = list_dynamodb_tables()
+    print(json.dumps({"tables": tables}))
+```
+
+### 2. External Data Source in Terraform
+You can then use Terraform's `external` data source to call this script and get the list of tables:
+
+```hcl
+data "external" "dynamodb_tables" {
+  program = ["python3", "list_dynamodb_tables.py"]
+}
+
+locals {
+  dynamo_tables = data.external.dynamodb_tables.result.tables
+}
+
+module "your_module" {
+  for_each = { for table in local.dynamo_tables : table.name => table }
+
+  table_name = each.value.name
+  table_arn  = each.value.arn
+
+  # Add other module variables here
+}
+```
+
+### 3. Run the Terraform Code
+Once the script is created and Terraform code is set up, run `terraform apply`. Terraform will call the Python script, retrieve the DynamoDB tables, and use them in the module.
+
+This approach helps to automate the process of retrieving all DynamoDB tables in your AWS account and use them within a Terraform module. Keep in mind that you need Python and `boto3` installed, and your AWS credentials should be configured properly for this to work.
 locals {
   dynamo_tables = [
     {
