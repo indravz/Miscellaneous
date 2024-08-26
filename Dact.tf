@@ -1,3 +1,31 @@
+
+locals {
+  dynamo_tables = [
+    {
+      name = aws_dynamodb_table.table1.name
+      arn  = aws_dynamodb_table.table1.arn
+    },
+    {
+      name = aws_dynamodb_table.table2.name
+      arn  = aws_dynamodb_table.table2.arn
+    },
+    # Add more tables here
+  ]
+}
+
+module "your_module" {
+  for_each = { for table in local.dynamo_tables : table.name => table }
+
+  table_name = each.value.name
+  table_arn  = each.value.arn
+
+  # Add other module variables here
+}
+
+
+
+
+
 To use a module for all the DynamoDB tables with the table names and ARNs, you can define these values in `locals` and then pass them to the module. Here’s how you can approach it:
 
 1. **Define Locals with Table Names and ARNs:**
