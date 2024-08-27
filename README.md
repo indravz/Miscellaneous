@@ -1,3 +1,28 @@
+
+Here’s a refined version of your email:
+
+---
+
+**Subject:** Inquiry on Module Support for us-west-1 Region and CI/CD Setup
+
+Hello Cloud Team,
+
+We are using a shared VPC model and the `intcloudfoundry` Terraform modules to spin up resources in the us-east-1 region.
+
+I would like to know if these modules also support the us-west-1 region and if they are compatible with our CI/CD setup (workloads on Lambda, ECS, and EC2).
+
+Additionally, any other suggestions you may have are welcome.
+
+Thank you!
+
+Best regards,  
+[Your Name]
+
+---
+
+Let me know if you want any more changes!
+
+
 resource "mongodb_db_role" "example_role" {
   name     = "myCustomRole"
   database = "my_database"
