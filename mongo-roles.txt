@@ -1,0 +1,125 @@
+resource "mongodbatlas_custom_db_role" "test_role" {
+  for_each   = toset(var.database_names)  # Convert list to a set to use with for_each
+  project_id = "<PROJECT-ID>"
+  role_name  = "myCustomRole_${each.key}"  # Append the database name to the role name for uniqueness
+
+  actions {
+    action = "UPDATE"
+    resources {
+      collection_name = ""
+      database_name   = each.key  # Use each.key to reference the current database name
+    }
+  }
+  actions {
+    action = "INSERT"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "REMOVE"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "FIND"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "LIST_COLLECTIONS"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "CREATE_COLLECTION"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "CREATE_INDEX"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "DROP_COLLECTION"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "LIST_INDEXES"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "DROP_INDEX"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "BYPASS_DOCUMENT_VALIDATION"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "RENAME_COLLECTION"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "CHANGE_STREAM"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "COLL_MOD"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "CONVERT_TO_CAPPED"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "VALIDATE"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+  actions {
+    action = "COMPACT"
+    resources {
+      collection_name = ""
+      database_name   = each.key
+    }
+  }
+}
