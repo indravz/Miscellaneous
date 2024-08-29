@@ -1,3 +1,138 @@
+###########################################
+
+variable "database_roles" {
+  type = list(object({
+    database_name = string
+    username       = string
+  }))
+  default = [
+    {
+      database_name = "alta"
+      username       = "alta_iam_user"
+    },
+    {
+      database_name = "test"
+      username       = "test_iam_user"
+    }
+  ]
+}
+
+resource "mongodbatlas_custom_db_role" "custom_roles" {
+  for_each = { for role in var.database_roles : role.database_name => role }
+
+  project_id = "<PROJECT-ID>"
+  role_name  = "myCustomRole_${each.key}"  # Construct the role name
+
+  actions {
+    action = "UPDATE"
+    resources {
+      collection_name = ""
+      database_name   = each.value.database_name
+    }
+  }
+  actions {
+    action = "INSERT"
+    resources {
+      collection_name = ""
+      database_name   = each.value.database_name
+    }
+  }
+  actions {
+    action = "REMOVE"
+    resources {
+      collection_name = ""
+      database_name   = each.value.database_name
+    }
+  }
+  # Include other actions as needed...
+}
+
+##################################################
+
+variable "user_password" {
+  type      = string
+  sensitive = true
+  default   = "yourpassword"  # Replace with your desired password
+}
+
+resource "mongodbatlas_database_user" "db_user" {
+  for_each = { for user in var.database_roles : user.username => user }
+
+  project_id    = "<PROJECT-ID>"
+  username      = each.key
+  password      = var.user_password
+  auth_database = "admin"  # Use 'admin' as the authentication database
+
+  roles {
+    role_name     = "myCustomRole_${each.value.database_name}"  # Construct the role name dynamically
+    database_name = "admin"  # Custom roles are stored in the 'admin' database
+  }
+}
+
+
+######################
+
+
+
+
+
+
+
+
+variable "database_roles" {
+  type = list(object({
+    database_name = string
+    username       = string
+  }))
+  default = [
+    {
+      database_name = "alta"
+      username       = "alta_iam_user"
+    },
+    {
+      database_name = "test"
+      username       = "test_iam_user"
+    }
+  ]
+}
+
+resource "mongodbatlas_custom_db_role" "custom_roles" {
+  for_each = { for role in var.database_roles : role.database_name => role }
+
+  project_id = "<PROJECT-ID>"
+  role_name  = "myCustomRole_${each.key}"  # Construct the role name
+
+  actions {
+    action = "UPDATE"
+    resources {
+      collection_name = ""
+      database_name   = each.value.database_name
+    }
+  }
+  actions {
+    action = "INSERT"
+    resources {
+      collection_name = ""
+      database_name   = each.value.database_name
+    }
+  }
+  actions {
+    action = "REMOVE"
+    resources {
+      collection_name = ""
+      database_name   = each.value.database_name
+    }
+  }
+  # Include other actions as needed...
+}
+
+
+
+
+
+
+
+###############################################################
 resource "mongodbatlas_custom_db_role" "test_role" {
   for_each   = toset(var.database_names)  # Convert list to a set to use with for_each
   project_id = "<PROJECT-ID>"
