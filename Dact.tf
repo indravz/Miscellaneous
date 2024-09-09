@@ -1,4 +1,16 @@
 Automating the retrieval of DynamoDB tables in Terraform requires using external data sources or scripts. Since Terraform doesn’t natively support listing all DynamoDB tables directly, you can use an external script to query the list of tables and then pass that data into Terraform.
+{
+    "TableName": "YourTableName",
+    "Key": {
+        "PrimaryKey": {
+            "S": "PrimaryKeyValue"
+        }
+    },
+    "ConditionExpression": "attribute_exists(PrimaryKey)"
+}
+
+
+
 
 Here’s an example using an external data source with a Python script:
 
