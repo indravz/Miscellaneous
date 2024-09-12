@@ -1,3 +1,51 @@
+provider "aws" {
+  region = "us-east-1" # Change to your region
+}
+
+resource "aws_ebs_volume" "my_volume" {
+  availability_zone = "us-east-1a" # Change to your preferred AZ
+  size              = 10           # Size in GiB
+
+  # Enable encryption with the CMK
+  encrypted         = true
+  kms_key_id        = aws_kms_key.my_key.arn
+
+  tags = {
+    Name = "MyEncryptedVolume"
+  }
+}
+
+# KMS key resource
+resource "aws_kms_key" "my_key" {
+  description             = "KMS key for EBS encryption"
+  deletion_window_in_days = 10
+
+  tags = {
+    Name = "EBSVolumeKey"
+  }
+}
+
+# Optional: Grant the necessary permissions to the EC2 service to use the key
+resource "aws_kms_alias" "my_key_alias" {
+  name          = "alias/my-volume-key"
+  target_key_id = aws_kms_key.my_key.id
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Automating the retrieval of DynamoDB tables in Terraform requires using external data sources or scripts. Since Terraform doesn’t natively support listing all DynamoDB tables directly, you can use an external script to query the list of tables and then pass that data into Terraform.
 {
     "TableName": "YourTableName",
