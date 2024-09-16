@@ -1,4 +1,18 @@
 
+
+provider "aws" {
+  region = "your-region"
+}
+
+# Use local-exec to run AWS CLI command for deletion
+resource "null_resource" "delete_log_group" {
+  provisioner "local-exec" {
+    command = "aws logs delete-log-group --log-group-name /aws/amazonmq/your-log-group-name"
+  }
+}
+
+
+
 Here’s a refined version of your email:
 
 ---
