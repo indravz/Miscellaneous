@@ -1,3 +1,15 @@
+resource "mongodbatlas_db_user" "db_user" {
+  count = length(local.database_metadata)
+
+  username = local.database_metadata[count.index].database_name
+
+  roles {
+    role_name     = local.database_metadata[count.index].role
+    database_name = local.database_metadata[count.index].database_name
+  }
+
+  # Add any other necessary arguments for the resource
+}
 
 
 provider "aws" {
