@@ -1,3 +1,20 @@
+{
+    "TableName": "YourTableName",
+    "Key": {
+        "knvitationid": {
+            "S": "PrimaryKeyValue"
+        }
+    },
+    "UpdateExpression": "SET #documentid = :documentValue",
+    "ExpressionAttributeNames": {
+        "#documentid": "documentid"
+    },
+    "ExpressionAttributeValues": {
+        ":documentValue": {
+            "N": "1234"
+        }
+    }
+}
 
 {
     "TableName": "YourTableName",
