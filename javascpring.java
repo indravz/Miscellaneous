@@ -1,3 +1,40 @@
+
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EntitlementService {
+
+    public Entitlements updateEntitlements(Task task, Entitlements entitlements) {
+        if (task.getRepcode() == null || task.getRepcode().isEmpty()) {
+            // Remove entitlements related to repcode (@R)
+            entitlements.setView(entitlements.getView().stream()
+                .filter(entitlement -> !entitlement.endsWith("@R"))
+                .collect(Collectors.toList()));
+
+            entitlements.setEdit(entitlements.getEdit().stream()
+                .filter(entitlement -> !entitlement.endsWith("@R"))
+                .collect(Collectors.toList()));
+        }
+
+        if (task.getBranchcode() == null || task.getBranchcode().isEmpty()) {
+            // Remove entitlements related to branchcode (@B)
+            entitlements.setView(entitlements.getView().stream()
+                .filter(entitlement -> !entitlement.endsWith("@B"))
+                .collect(Collectors.toList()));
+
+            entitlements.setEdit(entitlements.getEdit().stream()
+                .filter(entitlement -> !entitlement.endsWith("@B"))
+                .collect(Collectors.toList()));
+        }
+
+        return entitlements;
+    }
+}
+
+
+
+
 @PostMapping("/create")
     public String handleRequest(@RequestParam(name = "flag", required = false) Boolean flag) {
         if (flag == null) {
