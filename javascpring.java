@@ -1,3 +1,52 @@
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EntitlementService {
+
+    public Entitlements updateEntitlements(Task task, Entitlements entitlements) {
+        if (task.getRepcode() == null || task.getRepcode().isEmpty()) {
+            // Check if there are no entitlements with @R
+            if (!entitlements.getView().stream().anyMatch(ent -> ent.endsWith("@R")) &&
+                !entitlements.getEdit().stream().anyMatch(ent -> ent.endsWith("@R"))) {
+                // Clear the lists if no @R entitlements
+                entitlements.setView(List.of());
+                entitlements.setEdit(List.of());
+            } else {
+                // Remove entitlements related to @R
+                entitlements.setView(entitlements.getView().stream()
+                    .filter(ent -> !ent.endsWith("@R"))
+                    .collect(Collectors.toList()));
+
+                entitlements.setEdit(entitlements.getEdit().stream()
+                    .filter(ent -> !ent.endsWith("@R"))
+                    .collect(Collectors.toList()));
+            }
+        }
+
+        if (task.getBranchcode() == null || task.getBranchcode().isEmpty()) {
+            // Check if there are no entitlements with @B
+            if (!entitlements.getView().stream().anyMatch(ent -> ent.endsWith("@B")) &&
+                !entitlements.getEdit().stream().anyMatch(ent -> ent.endsWith("@B"))) {
+                // Clear the lists if no @B entitlements
+                entitlements.setView(List.of());
+                entitlements.setEdit(List.of());
+            } else {
+                // Remove entitlements related to @B
+                entitlements.setView(entitlements.getView().stream()
+                    .filter(ent -> !ent.endsWith("@B"))
+                    .collect(Collectors.toList()));
+
+                entitlements.setEdit(entitlements.getEdit().stream()
+                    .filter(ent -> !ent.endsWith("@B"))
+                    .collect(Collectors.toList()));
+            }
+        }
+
+        return entitlements;
+    }
+}
 
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
