@@ -1,3 +1,105 @@
+Certainly! Let's modify the implementation to use a `<span>` for displaying the selected `repcode` without using a separate `<div>`. We'll integrate your existing state management and methods into this structure.
+
+### Complete Code Example
+
+Here’s how to structure it:
+
+```tsx
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const MyComponent = () => {
+    const [submitting, setSubmitting] = useState(false); // Track if a submission is in progress
+    const [selectedRepCode, setSelectedRepCode] = useState<string | null>(null); // Track the selected repcode
+
+    // Function to save the service task to the server
+    const saveServiceTaskOnServer = async (data: any) => {
+        try {
+            const response = await axios.post('/your/api/endpoint', data); // Replace with your actual API endpoint
+            return response.data;
+        } catch (error) {
+            console.error('Error saving service task:', error);
+            throw error; // Rethrow the error for further handling
+        }
+    };
+
+    // Function to handle selecting a new repcode
+    const handleSelect = async (evt: React.ChangeEvent<HTMLSelectElement>) => {
+        const newValue = evt.target.value;
+        if (newValue && !selectedRepCode) { // Only allow selection if there's no current selection
+            setSubmitting(true); // Indicate that a submission is in progress
+            setSelectedRepCode(newValue); // Update the selected repcode
+            await saveServiceTaskOnServer({ ...serviceTask, repcode: newValue }); // Call API to save the new repcode
+            setSubmitting(false); // Reset submitting state
+        }
+    };
+
+    // Function to handle unselecting the current repcode
+    const handleUnselect = async () => {
+        if (selectedRepCode) {
+            setSubmitting(true); // Indicate that a submission is in progress
+            await saveServiceTaskOnServer({ ...serviceTask, repcode: null }); // Call API to set repcode to null
+            setSelectedRepCode(null); // Clear the selected repcode
+            setSubmitting(false); // Reset submitting state
+        }
+    };
+
+    return (
+        <div>
+            <span>
+                {selectedRepCode ? (
+                    <>
+                        {selectedRepCode} {/* Display the selected repcode */}
+                        <button onClick={handleUnselect}>x</button> {/* Button to unselect */}
+                    </>
+                ) : (
+                    <select onChange={handleSelect} disabled={submitting}> {/* Dropdown to select a repcode */}
+                        <option value="">Select an option</option>
+                        <option value="value1">Value 1</option>
+                        <option value="value2">Value 2</option>
+                        {/* Add more options as needed */}
+                    </select>
+                )}
+            </span>
+            {submitting && <span>Loading...</span>} {/* Show loading indicator while submitting */}
+        </div>
+    );
+};
+
+export default MyComponent;
+```
+
+### Explanation
+
+1. **State Management**:
+   - `submitting`: A boolean to track if an API call is in progress.
+   - `selectedRepCode`: A state variable that stores the currently selected `repcode`.
+
+2. **API Call Function**:
+   - `saveServiceTaskOnServer`: Sends a POST request to your specified endpoint to save the service task.
+
+3. **Handle Select**:
+   - `handleSelect`: This function is triggered when the user selects an option from the dropdown. It checks if a `repcode` is already selected. If not, it sets the new value and makes an API call to save it.
+
+4. **Handle Unselect**:
+   - `handleUnselect`: This function clears the selected `repcode` and calls the API to set it to `null`.
+
+5. **Rendering Logic**:
+   - A single `<span>` is used to display either the selected `repcode` with an "x" button or a dropdown for selection.
+   - If a `repcode` is selected, it shows the value and the "x" button to allow unselection.
+   - If no `repcode` is selected, it displays the dropdown.
+
+6. **Loading Indicator**:
+   - A loading message is shown while the API call is being processed.
+
+### User Interaction Flow
+- The user sees the selected `repcode` and can click "x" to unselect it, triggering an API call.
+- To select a new `repcode`, the user must first unselect the current one, which keeps the interaction clear and controlled.
+
+Let me know if this aligns with your requirements or if you need further modifications!
+
+/////////////////////////////
+
 You're right! I missed including the selection logic in the dropdown. Here's the complete code with the selection functionality properly implemented, ensuring that users must unselect the current `repcode` before they can select another option.
 
 ### Complete Code Example
