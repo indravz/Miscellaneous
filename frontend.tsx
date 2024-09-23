@@ -1,4 +1,57 @@
-// next.config.js
+<div>
+    <span className="flex items-center">
+        {/* Heading */}
+        <Heading typography="heading06" color="secondary" className="mr-2">
+            Rep code
+        </Heading>
+
+        {/* Conditional Rendering */}
+        {serviceTask?.repCode ? (
+            // Show "Unselect" button when a repCode is selected
+            <>
+                <span>{serviceTask.repCode}</span>
+                <button 
+                    onClick={async () => {
+                        setSubmitting(true);
+                        await saveServiceTaskOnServer({
+                            ...serviceTask,
+                            repCode: null, // Unset repCode
+                        });
+                        setSubmitting(false);
+                    }} 
+                    className="ml-2"
+                    disabled={submitting}
+                >
+                    Unselect
+                </button>
+            </>
+        ) : (
+            // Show Select dropdown when no repCode is selected
+            <Select
+                name="repCode"
+                className="w-52"
+                options={repCodeOptions} // repCodeOptions array should be provided
+                status={submitting ? "loading" : "none"}
+                onSelect={async (evt) => {
+                    if (evt.selectedValue) {
+                        setSubmitting(true);
+                        await saveServiceTaskOnServer({
+                            ...serviceTask,
+                            repCode: evt.selectedValue, // Set selected repCode
+                        });
+                        setSubmitting(false);
+                    }
+                }}
+                selectedValue={serviceTask?.repCode} // Set the value for controlled component
+                disabled={submitting} // Disable while submitting
+            />
+        )}
+    </span>
+</div>
+
+
+
+next.config.js
 module.exports = {
   // Your existing configuration settings here
 
