@@ -1,3 +1,40 @@
+<span className="flex items-center">
+    {/* Heading */}
+    <Heading typography="heading06" color="secondary" className="mr-2">
+        Rep code
+    </Heading>
+
+    {/* Conditional rendering of button or select */}
+    {selectedRepCode ? (
+        // Show "x" button if selectedRepCode is present
+        <>
+            <button onClick={handleUnselect} className="ml-2">
+                x
+            </button>
+        </>
+    ) : (
+        // Show <select> if no selectedRepCode
+        <select 
+            onChange={handleSelect} 
+            name="repCode" 
+            className="w-52 mr-2" 
+            disabled={submitting}
+        >
+            <option value="" disabled>
+                Select a Rep Code
+            </option>
+            {repCodeOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                    {option.label}
+                </option>
+            ))}
+        </select>
+    )}
+</span>
+
+
+
+
 URI uri = new URI(baseUri + "?accountNumber=" + accountNumber
         + "&documentType=" + documentType
         + "&envelopeId=" + envelopeId);
