@@ -1,3 +1,19 @@
+Sure! Here’s the updated feedback:
+
+---
+
+**Positive Feedback for Sreekanth:**
+
+Sreekanth is a great peer who manages his resources well and has good business knowledge. He is accountable and keeps everyone informed, which helps our teamwork. He also asks questions to understand the business better, which helps him give us good requirements.
+
+**Constructive Feedback for Sreekanth:**
+
+Sometimes, the requirements I get from Sreekanth are later not needed. It would help if we could have a review process to make sure we only focus on the most important requirements. This could reduce confusion and help us work better together.
+
+--- 
+
+Let me know if you need any more changes!
+
 ////////////////////////////////////////////
 
 Satish is an excellent technical collaborator who consistently demonstrates a deep understanding of engineering practices. His ability to effectively execute project requirements is impressive, and he often provides valuable technical insights that help the team optimize processes. 
