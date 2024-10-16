@@ -1,3 +1,17 @@
+Here’s feedback for Vedant:
+
+---
+
+**Feedback for Vedant:**
+
+Vedant is a promising fresher who shows a strong eagerness to learn and grow. Over the past year, he has acquired valuable business knowledge and technical skills, demonstrating impressive initiative. His friendly nature makes him approachable, and he consistently asks the right questions, which shows his engagement and desire to understand. Vedant's positive attitude and willingness to learn make him a great addition to the team, and I look forward to seeing his continued development.
+
+--- 
+
+Feel free to adjust any part of it!
+
+
+
 Sure! Here’s the updated feedback:
 
 ---
