@@ -1,3 +1,6 @@
+Nikhil is a very skilled engineer who works well with different teams when issues come up. He takes full ownership of problems and makes sure they are resolved. His communication is professional, and he clearly explains his requests, making it easy for others to understand. Nikhil’s dedication to teamwork and good communication helps our productivity a lot.
+////////////////////////////////
+
 Alfredo tends to be less responsive when there are no ongoing issues, and he rarely replies when information is requested. While I understand he may be busy with hotfixes and other priorities, it would be beneficial for him to take a moment to respond later, even after a day or two, once he has addressed the immediate tasks. This would help improve communication and ensure that everyone stays aligned and informed.
 
 
