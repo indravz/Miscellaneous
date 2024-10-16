@@ -1,3 +1,15 @@
+////////////////////////////////////////////
+
+Satish is an excellent technical collaborator who consistently demonstrates a deep understanding of engineering practices. His ability to effectively execute project requirements is impressive, and he often provides valuable technical insights that help the team optimize processes. 
+
+Satish has a knack for identifying changes that minimize time while maximizing effectiveness, which significantly contributes to our team's overall productivity. His proactive approach and clear communication make him a key asset in our projects. 
+
+Overall, Satish's technical expertise and problem-solving skills enhance our team's performance, and I look forward to continuing to work with him.
+
+--- 
+
+Feel free to adjust any part of it or let me know if you'd like to add more specific examples!
+//////////////////////////////////////////////////
 Mangala's communication is consistently clear, and he actively promotes best practices, ensuring alignment with firmwide standards. He takes the initiative to kickstart new projects and implementations, motivating others to engage with these initiatives. His professionalism and calm demeanor when collaborating with different teams contribute to a positive work environment. Overall, Mangala is a valuable team member who effectively drives progress while maintaining strong relationships.
 
 Mangala should enhance communication by informing other teams about how requested changes or implementations impact the business. Involving all relevant stakeholders from the planning phase will encourage ownership and enable team members to suggest valuable changes and improvements. This collaborative approach can lead to more effective solutions and greater engagement across teams.
