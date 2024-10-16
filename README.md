@@ -1,9 +1,22 @@
+////////////////////////////////////////
+
+Erfang is an excellent technical resource with a strong understanding of diverse technologies. He consistently advocates for simplifying processes, which positively impacts our workflow. He actively educates team members about the business, enhancing overall awareness and understanding. His communication is clear and effective, ensuring that expectations are well conveyed to both product and business stakeholders. Additionally, he respects work hours and only reaches out after hours for critical issues, contributing to a healthy work-life balance. Overall, Erfang's combination of technical expertise and business knowledge makes him a valuable asset to our team.
+
+Erfang should work on respecting all types of work, not just development, as every role is essential to running the business. Additionally, it would be helpful if he provided more honest feedback about performance, as I often only hear that everything is going well. Another small area for improvement is that during discussions about technical topics, he tends to repeat certain analogies, which can detract from the main point. Despite these points, he is one of the best managers I’ve worked under.
+////////////////////////////////////////////
+
+
+
+
 resource "mongodbatlas_db_user" "db_user" {
   count = length(local.database_metadata)
 
   username = local.database_metadata[count.index].database_name
 
   roles {
+
+
+  
     role_name     = local.database_metadata[count.index].role
     database_name = local.database_metadata[count.index].database_name
   }
