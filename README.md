@@ -1,3 +1,6 @@
+find . -type f -exec cat {} + > consolidated_file
+
+
 Adhesh brings a positive energy to the team that makes working together more enjoyable. He has a good sense of humor and is always willing to help with any technical issues or questions. His readiness to assist others is appreciated and contributes to our team's overall success.
 
 //
