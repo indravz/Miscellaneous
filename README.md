@@ -1,3 +1,8 @@
+Adhesh brings a positive energy to the team that makes working together more enjoyable. He has a good sense of humor and is always willing to help with any technical issues or questions. His readiness to assist others is appreciated and contributes to our team's overall success.
+
+//
+
+
 Nikhil is a very skilled engineer who works well with different teams when issues come up. He takes full ownership of problems and makes sure they are resolved. His communication is professional, and he clearly explains his requests, making it easy for others to understand. Nikhil’s dedication to teamwork and good communication helps our productivity a lot.
 ////////////////////////////////
 
